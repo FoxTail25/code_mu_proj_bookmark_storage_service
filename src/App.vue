@@ -1,9 +1,8 @@
 <script setup>
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { RouterLink, RouterView } from 'vue-router'
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
-// import HelloWorld from './components/HelloWorld.vue'
 
 // console.log(nanoid())
 const store = useBookmarkStore()
@@ -11,6 +10,14 @@ store.setFirstData()
 
 </script>
 
+<script>
+export default {
+  mounted() {
+    // this.$refs.first.focus()
+    // this.$refs.first.hover
+  }
+}
+</script>
 
 
 <template>
@@ -21,7 +28,7 @@ store.setFirstData()
 
     <ul class="nav nav-tabs justify-content-center mb-4">
       <li class="nav-item">
-        <RouterLink to="/" class="nav-link" aria-current="page">Мои закладки</RouterLink>
+        <RouterLink to="/" class="nav-link">Мои закладки</RouterLink>
       </li>
       <li class="nav-item">
         <RouterLink to="/edit_group" class="nav-link">Редактирование групп</RouterLink>
@@ -37,6 +44,9 @@ store.setFirstData()
 </template>
 
 <style scoped>
+.otr {
+  transform: scale(1, -1);
+}
 /* header {
   line-height: 1.5;
   max-height: 100vh;

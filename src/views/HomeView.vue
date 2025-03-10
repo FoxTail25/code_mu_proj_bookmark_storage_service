@@ -39,14 +39,14 @@ export default {
 
   <main class="container">
 
-    <div class="row">
-      <div v-for="elem in getOrder" key="elem.id" class="col-12 col-md-6">
+    <div class="row g-2">
+      <div v-for="elem in getOrder" :key="elem.id" class="col-12 col-md-6">
         <div class="card">
 
           <div class="card-body">
 
             <h5 class="card-title"> {{ elem.section_name }}</h5>
-            <p v-for="item in elem.bookmarksList" class="card-text">
+            <p v-for="item in elem.bookmarksList" :key="item.id" class="card-text">
 
               <a :href="item.link" target="_blank" :title="item.description">
                 <!-- <img :src="getFav(item.link)" alt="favicon" width="16px" height="16px" class="p-6"> -->

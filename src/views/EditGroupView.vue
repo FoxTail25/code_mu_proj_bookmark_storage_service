@@ -1,9 +1,59 @@
-<script setup lang="ts">
+<script setup>
+import IcinArrowDown from '@/components/IconArrowDown.vue';
+import IcinArrowUp from '@/components/IconArrowUp.vue';
 import PageHeader from '@/components/PageHeader.vue';
+import { useBookmarkStore } from '@/stores/bookmarks';
+
+</script>
+<script>
+let store;
+
+export default {
+  data() {
+    return {
+      bookmarkArr: [],
+    }
+  },
+  methods: {
+    changeOrder(order, id, direct) {
+      console.log(order)
+      console.log(id)
+      console.log(direct)
+    },
+    checkUp(num) {
+      return num == 0
+        ? true
+        : false
+    },
+    checkDown(num) {
+      return num == this.bookmarkArr.length - 1
+        ? true
+        : false
+    },
+  },
+  created() {
+    store = useBookmarkStore();
+    this.bookmarkArr = store.bookmarkArr
+  }
+}
 </script>
 
 <template>
-  <PageHeader :msg="'Редактирование груп записей'" />
+  <PageHeader :msg="'Редактирование групп записей'" />
+  <ol>
+    <li v-for="(elem) in bookmarkArr" :key="elem.id">
+      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.section_order, elem.id, 'up')"
+        :disabled="checkUp(elem.section_order)">
+        <IcinArrowUp />
+      </button>
+      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.section_order, elem.id, 'down')"
+        :disabled="checkDown(elem.section_order)">
+        <IcinArrowDown />
+      </button>
+      {{ elem.section_name }}
+
+    </li>
+  </ol>
 </template>
 
 <style></style>
