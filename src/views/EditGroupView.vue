@@ -2,6 +2,7 @@
 import EditText from '@/components/icon/EditText.vue';
 import IcinArrowDown from '@/components/icon/IconArrowDown.vue';
 import IcinArrowUp from '@/components/icon/IconArrowUp.vue';
+import SaveText from '@/components/icon/SaveText.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
 
@@ -13,6 +14,9 @@ export default {
   data() {
     return {
       bookmarkArr: [],
+      nameText: '',
+      newGroupName: '',
+      selectedToDelete: 'Выберите имя группы',
     }
   },
   methods: {
@@ -30,9 +34,39 @@ export default {
         : false
     },
     editGroupName(elemId, elemName) {
-      let elem = this.bookmarkArr.filter(e => e.id == elemId)[0]
-      console.log({ ...elem })
+      this.bookmarkArr.forEach(e => {
+        if (e.id == elemId) {
+          e.edit = true;
+        }
+      })
+      this.nameText = elemName;
     },
+    saveGroupName(elemId) {
+      this.bookmarkArr.forEach(e => {
+        if (e.id == elemId) {
+          e.edit = false;
+        }
+      })
+      // console.log(this.nameText)
+      let newName = this._checkText(this.nameText)
+      store.changeGroupName(elemId, newName)
+      this.nameText = '';
+    },
+    addNewGroup() {
+      let newName = this._checkText(this.newGroupName)
+      store.addNewGroup(newName)
+      this.newGroupName = ''
+    },
+    deleteGroup() {
+      if (this.selectedToDelete != 'Выберите имя группы') {
+        store.deleteBookmarkGroup(this.selectedToDelete)
+      } else {
+        console.log('datda')
+      }
+    },
+    _checkText(str) {
+      return str.trim().length > 0 ? str : 'безымянная'
+    }
 
   },
   computed: {
@@ -51,8 +85,9 @@ export default {
 
 <template>
   <PageHeader :msg="'Редактирование групп записей'" />
-
-  <div class="row justify-content-center">
+  <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6" />
+  <!-- Изменение порядка и имени -->
+  <div class="row justify-content-center mb-4">
 
     <ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
       <li v-for="(elem) in sorted" :key="elem.id"
@@ -72,15 +107,44 @@ export default {
         <span v-if="!elem.edit" class="f1">
           {{ elem.section_name }}
         </span>
-        <input v-else="!elem.edit" class="f1" :value="elem.section_name">
+        <input v-else="!elem.edit" type="text" class="form-control f1" v-model="nameText">
 
 
-        <button class="btn btn-primary p-1 m-1 lh-1" @click="editGroupName(elem.id, elem.section_name)"
-          title="Изменить название группы">
+        <button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
+          @click="editGroupName(elem.id, elem.section_name)" title="Изменить название группы">
           <EditText />
+        </button>
+        <button v-else="!elem.edit" class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
+          title="сохранить название группы">
+          <SaveText />
         </button>
       </li>
     </ol>
+  </div>
+  <!-- Добавление новой группы -->
+  <PageHeader :msg="'Добавление новой группы'" />
+  <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6" />
+  <div class="mt-2 mb-4">
+    <div class="row justify-content-center">
+      <div class="col-10 mb-2">
+        <input type="text" class="form-control" v-model="newGroupName">
+      </div>
+      <button class="btn btn-primary col-10 col-sm-6 col-md-4" @click="addNewGroup">Добавить новую группу</button>
+    </div>
+  </div>
+  <!-- Удаление группы -->
+  <PageHeader :msg="'Удаление группы'" />
+  <PageHeader :msg="'(выберите группу	из выпадающего списка &laquo;Удалить группу&raquo;)'" :num="6" />
+  <div class="mt-2">
+    <div class="row justify-content-center">
+      <div class="col-10 mb-2">
+        <select class="form-select" aria-label="Default select example" v-model="selectedToDelete">
+          <option>Выберите имя группы</option>
+          <option v-for="elem in bookmarkArr" :value="elem.id">{{ elem.section_name }}</option>
+        </select>
+      </div>
+      <button class="btn btn-danger col-10 col-sm-6 col-md-4" @click="deleteGroup">Удалить группу</button>
+    </div>
   </div>
 </template>
 

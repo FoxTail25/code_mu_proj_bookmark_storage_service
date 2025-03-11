@@ -4,6 +4,7 @@ import {
 } from 'vue'
 import { defineStore } from 'pinia'
 import { dafaultBookmarksArr } from '@/util/defaultBookmarks'
+import { nanoid } from 'nanoid';
 
 export const useBookmarkStore = defineStore('bookmarks', () => {
   const bookmarkArr = ref([]);
@@ -13,7 +14,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
 
   function setFirstData() {
     name.value = 'default'
-    bookmarkArr.value = [...dafaultBookmarksArr].map(elem => { return { ...elem, edit: false } })
+    bookmarkArr.value = [...dafaultBookmarksArr]
   };
   function changeGroupOrder(id, direct) {
     console.log(id, direct)
@@ -38,11 +39,40 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value[replaceableIndex].section_order = currentIndex;
 
   };
+  function changeGroupName(id, name) {
+    bookmarkArr.value.forEach(e => {
+      if (e.id == id) {
+        e.section_name = name;
+      }
+    })
+  }
+  function addNewGroup(newGroupName) {
+    let orderNumber = bookmarkArr.value.length;
+    let id = nanoid();
+    bookmarkArr.value.push({
+      id: id,
+      section_order: orderNumber,
+      section_name: newGroupName,
+      edit: false,
+      bookmarksList: []
+    });
+  };
+  function deleteBookmarkGroup(id) {
+    console.log(id);
+    // console.log('befor', bookmarkArr.value)
+    // bookmarkArr.value = bookmarkArr.value.filter(e => e.id != id)
+    // // bookmarkArr.value = []
+    // console.log('after', bookmarkArr.value)
+
+  }
 
   return {
     bookmarkArr,
     name,
-    changeGroupOrder,
     setFirstData,
+    changeGroupOrder,
+    changeGroupName,
+    addNewGroup,
+    deleteBookmarkGroup,
   };
 })
