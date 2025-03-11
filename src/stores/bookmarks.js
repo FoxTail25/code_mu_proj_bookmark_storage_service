@@ -13,9 +13,10 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
 
   function setFirstData() {
     name.value = 'default'
-    bookmarkArr.value = [...dafaultBookmarksArr]
+    bookmarkArr.value = [...dafaultBookmarksArr].map(elem => { return { ...elem, edit: false } })
   };
   function changeGroupOrder(id, direct) {
+    console.log(id, direct)
     let currentIndex;
     let replaceableIndex;
     if (direct == 'up') {

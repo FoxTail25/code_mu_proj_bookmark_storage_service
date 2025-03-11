@@ -30,17 +30,15 @@ export default {
         : false
     },
     editGroupName(elemId, elemName) {
-      // console.log(elemId)
-      // console.log(elemName)
-      let elem = this.bookmarkArr.filter(e => e.id == elemId)
-      console.log(elem)
+      let elem = this.bookmarkArr.filter(e => e.id == elemId)[0]
+      console.log({ ...elem })
     },
 
   },
   computed: {
     sorted() {
       this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
-      return this.bookmarkArr.map(elem => { return { ...elem, edit: false } })
+      return this.bookmarkArr
     }
   },
 
