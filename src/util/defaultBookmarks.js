@@ -39,7 +39,7 @@ export const dafaultBookmarksArr = [
 				edit: false,
 			},
 			{
-				id: '',
+				id: '-FzflpDLCVh5aHXsnqKAK',
 				linkOrder: 1,
 				name: 'w3schools css',
 				link: 'https://www.w3schools.com/css/default.asp',
@@ -55,7 +55,7 @@ export const dafaultBookmarksArr = [
 		edit: false,
 		bookmarksList: [
 			{
-				id: '1CxCy91J6qqaj8Lhd4m7o',
+				id: 'Ot2iPgCqI56BZT4rJ9CD3',
 				linkOrder: 0,
 				name: 'Animate.css',
 				link: 'https://animate.style/',
@@ -63,7 +63,7 @@ export const dafaultBookmarksArr = [
 				edit: false,
 			},
 			{
-				id: '',
+				id: 'sP9GMmXkh_CNIyyHHkovM',
 				linkOrder: 1,
 				name: 'w3schools css',
 				link: 'https://www.w3schools.com/css/default.asp',

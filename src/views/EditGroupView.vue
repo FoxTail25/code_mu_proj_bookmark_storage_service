@@ -47,7 +47,6 @@ export default {
           e.edit = false;
         }
       })
-      // console.log(this.nameText)
       let newName = this._checkText(this.nameText)
       store.changeGroupName(elemId, newName)
       this.nameText = '';
@@ -64,7 +63,7 @@ export default {
         console.log('datda')
       }
     },
-    
+
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
     }
@@ -89,6 +88,8 @@ export default {
   <PageHeader :msg="'Редактирование групп записей'" />
   <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6" />
   <!-- Изменение порядка и имени -->
+  <!-- <div class="container"> -->
+
   <div class="row justify-content-center mb-4">
 
     <ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
@@ -142,12 +143,13 @@ export default {
       <div class="col-10 mb-2">
         <select class="form-select" aria-label="Default select example" v-model="selectedToDelete">
           <option>Выберите имя группы</option>
-          <option v-for="elem in bookmarkArr" :value="elem.id">{{ elem.section_name }}</option>
+          <option v-for="elem in sorted" :value="elem.id" :key="elem.id">{{ elem.section_name }}</option>
         </select>
       </div>
       <button class="btn btn-danger col-10 col-sm-6 col-md-4" @click="deleteGroup">Удалить группу</button>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <style>

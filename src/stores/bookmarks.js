@@ -61,7 +61,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     console.log(id);
     let index;
     bookmarkArr.value.forEach((e, i) => {
-      if (e.id = id) {
+      if (e.id == id) {
         index = i
       }
     })
