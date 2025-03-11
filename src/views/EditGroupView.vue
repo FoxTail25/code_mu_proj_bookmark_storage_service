@@ -64,6 +64,7 @@ export default {
         console.log('datda')
       }
     },
+    
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
     }
@@ -72,6 +73,7 @@ export default {
   computed: {
     sorted() {
       this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
+      console.log('computed', this.bookmarkArr)
       return this.bookmarkArr
     }
   },

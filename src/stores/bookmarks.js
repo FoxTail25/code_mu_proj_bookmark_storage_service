@@ -64,7 +64,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     // // bookmarkArr.value = []
     // console.log('after', bookmarkArr.value)
 
-  }
+  };
 
   return {
     bookmarkArr,
