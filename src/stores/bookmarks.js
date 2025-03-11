@@ -59,10 +59,13 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   };
   function deleteBookmarkGroup(id) {
     console.log(id);
-    // console.log('befor', bookmarkArr.value)
-    // bookmarkArr.value = bookmarkArr.value.filter(e => e.id != id)
-    // // bookmarkArr.value = []
-    // console.log('after', bookmarkArr.value)
+    let index;
+    bookmarkArr.value.forEach((e, i) => {
+      if (e.id = id) {
+        index = i
+      }
+    })
+    bookmarkArr.value.splice(index, 1)
 
   };
 
