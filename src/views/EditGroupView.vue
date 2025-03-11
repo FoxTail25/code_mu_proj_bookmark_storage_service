@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     changeOrder(id, direct) {
-      store.changeGroupOrder(id, direct)
+      store.changeGroupOrder(id, direct);
     },
     checkUp(num) {
       return num == 0
@@ -28,7 +28,14 @@ export default {
         ? true
         : false
     },
+
   },
+  computed: {
+    sorted() {
+      return this.bookmarkArr.sort((a, b) => a.section_order - b.section_order)
+    }
+  },
+
   created() {
     store = useBookmarkStore();
     this.bookmarkArr = store.bookmarkArr
@@ -39,7 +46,7 @@ export default {
 <template>
   <PageHeader :msg="'Редактирование групп записей'" />
   <ol>
-    <li v-for="(elem) in bookmarkArr" :key="elem.id">
+    <li v-for="(elem) in sorted" :key="elem.id">
       <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
         :disabled="checkUp(elem.section_order)">
         <IcinArrowUp />

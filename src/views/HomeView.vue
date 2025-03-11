@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     this.bookmarks = [...store.bookmarkArr];
+    // store.sortedBookmarks
   },
   created() {
     store = useBookmarkStore()

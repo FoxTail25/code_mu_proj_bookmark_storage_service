@@ -9,33 +9,35 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   const bookmarkArr = ref([])
   const name = ref('none')
   // const sortedBookmarks = computed(() => bookmarkArr.value.sort((a, b) => a.section_order - b.section_order));
+  // const sortedBookmarks = computed(() => console.log('store sorted', bookmarkArr.value));
 
   function setFirstData() {
     name.value = 'default'
     bookmarkArr.value = [...dafaultBookmarksArr]
   }
   function changeGroupOrder(id, direct) {
-    let ind1;
-    let ind2;
+    let currentIndex;
+    let replaceableIndex;
     if (direct == 'up') {
       bookmarkArr.value.forEach((elem, index) => {
         if (elem.id == id) {
-          console.log('up', elem)
-          ind1 = index;
-          ind2 = index - 1;
+          currentIndex = index;
+          replaceableIndex = index - 1;
         }
       })
     } else {
-      bookmarkArr.value.forEach((elem,index) => {
+      bookmarkArr.value.forEach((elem, index) => {
         if (elem.id == id) {
-          console.log('up', elem)
-          ind1 = index;
-          ind2 = index + 1;
+          currentIndex = index;
+          replaceableIndex = index + 1;
         }
       })
     }
-    console.log('ind1',ind1)
-    console.log('ind2',ind2)
+    bookmarkArr.value[currentIndex].section_order = replaceableIndex;
+    bookmarkArr.value[replaceableIndex].section_order = currentIndex;
+    // sortedBookmarks
+    // console.log('currentIndex', currentIndex)
+    // console.log('replaceableIndex', replaceableIndex)
   }
 
   return {
