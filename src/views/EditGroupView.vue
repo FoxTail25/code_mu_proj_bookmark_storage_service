@@ -15,10 +15,8 @@ export default {
     }
   },
   methods: {
-    changeOrder(order, id, direct) {
-      console.log(order)
-      console.log(id)
-      console.log(direct)
+    changeOrder(id, direct) {
+      store.changeGroupOrder(id, direct)
     },
     checkUp(num) {
       return num == 0
@@ -42,11 +40,11 @@ export default {
   <PageHeader :msg="'Редактирование групп записей'" />
   <ol>
     <li v-for="(elem) in bookmarkArr" :key="elem.id">
-      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.section_order, elem.id, 'up')"
+      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
         :disabled="checkUp(elem.section_order)">
         <IcinArrowUp />
       </button>
-      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.section_order, elem.id, 'down')"
+      <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'down')"
         :disabled="checkDown(elem.section_order)">
         <IcinArrowDown />
       </button>
