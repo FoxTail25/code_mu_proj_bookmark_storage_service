@@ -1,10 +1,10 @@
 <script setup>
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { RouterLink, RouterView } from 'vue-router'
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
 
-console.log(nanoid())
+// console.log(nanoid())
 const store = useBookmarkStore()
 store.setFirstData()
 
@@ -13,8 +13,6 @@ store.setFirstData()
 <script>
 export default {
   mounted() {
-    // this.$refs.first.focus()
-    // this.$refs.first.hover
   }
 }
 </script>

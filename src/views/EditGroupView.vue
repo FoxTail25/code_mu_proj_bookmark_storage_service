@@ -60,19 +60,23 @@ export default {
       if (this.selectedToDelete != 'Выберите имя группы') {
         store.deleteBookmarkGroup(this.selectedToDelete)
       } else {
-        console.log('datda')
+        console.log('Не выбрана группа')
+        this.showModal()
       }
     },
 
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
-    }
+    },
 
+    showModal() {
+      console.log('da')
+    },
   },
   computed: {
     sorted() {
       this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
-      console.log('computed', this.bookmarkArr)
+      // console.log('computed', this.bookmarkArr)
       return this.bookmarkArr
     }
   },
@@ -150,6 +154,7 @@ export default {
     </div>
   </div>
   <!-- </div> -->
+
 </template>
 
 <style>
