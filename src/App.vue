@@ -1,10 +1,10 @@
 <script setup>
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { RouterLink, RouterView } from 'vue-router'
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
 
-// console.log(nanoid())
+console.log(nanoid())
 const store = useBookmarkStore()
 store.setFirstData()
 
@@ -47,6 +47,7 @@ export default {
 .otr {
   transform: scale(1, -1);
 }
+
 /* header {
   line-height: 1.5;
   max-height: 100vh;
