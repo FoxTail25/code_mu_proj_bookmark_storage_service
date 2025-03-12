@@ -46,6 +46,7 @@ export default {
 			}
 			if (!blankField) {
 				console.log('!все поля заполнены!');
+				store.addNewLinkRecord(this.selectedToEdit, this.editLinkRecord)
 			} else {
 				let blankFildName;
 				switch (blankField) {

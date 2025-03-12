@@ -57,6 +57,17 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
       bookmarksList: []
     });
   };
+  function deleteBookmarkGroup(id) {
+    // console.log(id);
+    let index;
+    bookmarkArr.value.forEach((e, i) => {
+      if (e.id == id) {
+        index = i
+      }
+    })
+    bookmarkArr.value.splice(index, 1)
+
+  };
 
 
   function changeRecordOrder(groupId, recordId, direct) {
@@ -80,19 +91,18 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
   };
+  function addNewLinkRecord(groupId, newRecordObjData) {
+    console.log(groupId)
+    // console.log(newRecordObjData)
+    // let id = nanoid()
+    let newLinkRecord = {
+      ...newRecordObjData, id: nanoid(), linkOrder: bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.length, edit: false
+    }
+    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord)
+    // console.log(obj)
+    // console.log(newLinkRecord)
+  }
 
-
-  function deleteBookmarkGroup(id) {
-    // console.log(id);
-    let index;
-    bookmarkArr.value.forEach((e, i) => {
-      if (e.id == id) {
-        index = i
-      }
-    })
-    bookmarkArr.value.splice(index, 1)
-
-  };
 
   return {
     bookmarkArr,
@@ -103,5 +113,6 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     addNewGroup,
     deleteBookmarkGroup,
     changeRecordOrder,
+    addNewLinkRecord,
   };
 })
