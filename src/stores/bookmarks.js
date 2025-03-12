@@ -98,8 +98,8 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord)
   }
   function deleteLinkFromGroup(groupId, linkId) {
-    console.log('groupId', groupId);
-    console.log(bookmarkArr.value)
+    // console.log('groupId', groupId);
+    // console.log(bookmarkArr.value)
     let groupIndex;
     let linkIndex;
     bookmarkArr.value.forEach((e, i) => {
@@ -112,11 +112,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
         linkIndex = i
       }
     })
-
-    console.log('groupIndex', groupIndex)
-    console.log('linkIndex', linkIndex)
-    let splice = bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
-    console.log('splice', splice);
+    bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
   }
 
   return {

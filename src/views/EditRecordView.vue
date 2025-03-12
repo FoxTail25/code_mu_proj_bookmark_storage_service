@@ -14,12 +14,17 @@ export default {
 		return {
 			bookmarkArr: [],
 			selectedToEdit: 'Выберите имя группы',
-			editLinkRecord: {
+			selectedToDelete: 'Выберите имя записи',
+			editNewLinkRecord: {
 				link: '',
 				name: '',
 				description: '',
 			},
-			selectedToDelete: 'Выберите имя записи'
+			editOldLinkRecord: {
+				link: '',
+				name: '',
+				description: '',
+			},
 
 		}
 	},
@@ -39,15 +44,20 @@ export default {
 		},
 		addNewLinkInGroup() {
 			let blankField = false;
-			for (let record in this.editLinkRecord) {
-				if (!this._checkText(this.editLinkRecord[record])) {
+			for (let record in this.editNewLinkRecord) {
+				if (!this._checkText(this.editNewLinkRecord[record])) {
 					blankField = record;
 					break
 				}
 			}
 			if (!blankField) {
 				console.log('!все поля заполнены!');
-				store.addNewLinkRecord(this.selectedToEdit, this.editLinkRecord)
+				store.addNewLinkRecord(this.selectedToEdit, this.editNewLinkRecord);
+				this.editNewLinkRecord = {
+					link: '',
+					name: '',
+					description: '',
+				};
 			} else {
 				let blankFildName;
 				switch (blankField) {
@@ -63,6 +73,18 @@ export default {
 				 <span class="text-danger">не заполнено!</span>`;
 				this.$refs.modal.click();
 			}
+		},
+		editLinkRecordFromGroup(id) {
+			let obj = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
+			let link = obj.bookmarksList.filter(e => e.id == id)[0]
+			this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
+			link.edit = true
+		},
+		saveLinkRecordFromGroup(id) {
+			let obj = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
+			let link = obj.bookmarksList.filter(e => e.id == id)[0]
+			this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
+			link.edit = false
 		},
 		deleteLinkFromGroup() {
 			// console.log(this.selectedToDelete);
@@ -94,10 +116,6 @@ export default {
 				return selectedGroup.bookmarksList
 			}
 		},
-		// selectedLinkToDelete() {
-		// }
-
-
 	},
 	created() {
 		store = useBookmarkStore();
@@ -129,32 +147,88 @@ export default {
 			<div class="row justify-content-center">
 
 				<ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8 mb-4">
-					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id"
-						class="list-group-item d-flex align-items-center justify-content-between">
-						<span>
-							<button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
-								:disabled="checkUp(elem.linkOrder)" title="Переместить группу вверх">
-								<IconArrowUp />
-							</button>
-							<button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'down')"
-								:disabled="checkDown(elem.linkOrder)" title="Переместить группу вниз">
-								<IconArrowDown />
-							</button>
-						</span>
-						<span v-if="!elem.edit" class="f1">
-							{{ elem.name }}
-						</span>
-						<input v-else type="text" class="form-control f1" v-model="nameText">
+					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id" class="list-group-item d-flex">
 
-						<button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
-							@click="editGroupName(elem.id, elem.section_name)" title="Изменить название группы">
-							<EditText />
-						</button>
-						<button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
-							title="сохранить название группы">
-							<SaveText />
-						</button>
+						<div class="row w-100">
+							<div class="col-12 d-flex align-items-center justify-content-between">
 
+
+								<span>
+									<button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
+										:disabled="checkUp(elem.linkOrder)" title="Переместить группу вверх">
+										<IconArrowUp />
+									</button>
+									<button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'down')"
+										:disabled="checkDown(elem.linkOrder)" title="Переместить группу вниз">
+										<IconArrowDown />
+									</button>
+								</span>
+								<span class="f1">
+									{{ elem.name }}
+								</span>
+
+								<button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
+									@click="editLinkRecordFromGroup(elem.id)" title="Отредактировать запись">
+									<EditText />
+								</button>
+								<button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveLinkRecordFromGroup(elem.id)"
+									title="сохранить запись">
+									<SaveText />
+								</button>
+							</div>
+							<!-- <div v-if="elem.edit" class="col-12">
+
+								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.link">
+								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.name">
+								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.description">
+							</div> -->
+
+							<div v-if="elem.edit" class="row g-1 justify-content-center">
+								<div class="input-group mb-1 ">
+									<div class="col-12 mb-2">
+										<label for="inputLink" class="row g-1">
+											<div class="col-3 col-sm-2 col-md-2">
+												<span class="input-group-text" id="basic-addon1">Link</span>
+											</div>
+											<div class="col-9 col-sm-10 col-md-10">
+												<input type="text" class="form-control" placeholder="Адрес ссылки"
+													aria-label="Username" aria-describedby="basic-addon1" id="inputLink"
+													v-model="editOldLinkRecord.link">
+											</div>
+										</label>
+									</div>
+									<div class="col-12  mb-2">
+										<label class="row g-1" for="inputName">
+											<div class="col-3 col-sm-2 col-md-2">
+												<span class="input-group-text" id="basic-addon2">Имя</span>
+											</div>
+											<div class="col-9 col-sm-10 col-md-10">
+												<input type="text" class="form-control"
+													placeholder="Отображаемое название" aria-label="Username"
+													aria-describedby="basic-addon2" id="inputName"
+													v-model="editOldLinkRecord.name">
+											</div>
+										</label>
+									</div>
+									<div class="col-12 mb-2">
+										<label class="row g-1" for="inputDescription">
+											<div class="col-3 col-sm-2 col-md-2">
+												<span class="input-group-text" id="basic-addon3">Title</span>
+											</div>
+											<div class="col-9 col-sm-10 col-md-10">
+												<input type="text" class="form-control" placeholder="Описание"
+													aria-label="Username" aria-describedby="basic-addon3"
+													id="inputDescription" v-model="editOldLinkRecord.description">
+											</div>
+										</label>
+									</div>
+
+								</div>
+							</div>
+
+
+
+						</div>
 					</li>
 				</ol>
 
@@ -162,7 +236,7 @@ export default {
 				<PageHeader :msg="'(Заполните обязательные поля и нажмите &laquo;Добавить запись в группу&raquo;)'"
 					:num="6" :tagName="'P'" />
 				<div class="row g-1 justify-content-center">
-					<div class="input-group mb-3 justify-content-center">
+					<div class="input-group mb-1 justify-content-center">
 						<div class="col-12 col-sm-10 mb-2">
 							<label for="inputLink" class="row g-1">
 								<div class="col-3 col-sm-2 col-md-1">
@@ -171,7 +245,7 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Адрес ссылки"
 										aria-label="Username" aria-describedby="basic-addon1" id="inputLink"
-										v-model="editLinkRecord.link">
+										v-model="editNewLinkRecord.link">
 								</div>
 							</label>
 						</div>
@@ -183,7 +257,7 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Отображаемое название"
 										aria-label="Username" aria-describedby="basic-addon2" id="inputName"
-										v-model="editLinkRecord.name">
+										v-model="editNewLinkRecord.name">
 								</div>
 							</label>
 						</div>
@@ -195,13 +269,13 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Описание" aria-label="Username"
 										aria-describedby="basic-addon3" id="inputDescription"
-										v-model="editLinkRecord.description">
+										v-model="editNewLinkRecord.description">
 								</div>
 							</label>
 						</div>
 
 					</div>
-					<div class="col-10 text-center">
+					<div class="col-10 text-center mb-4">
 						<button class="btn btn-success" @click="addNewLinkInGroup">Добавить ссылку в группу</button>
 					</div>
 				</div>
