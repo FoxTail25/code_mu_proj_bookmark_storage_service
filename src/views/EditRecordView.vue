@@ -19,6 +19,7 @@ export default {
 				name: '',
 				description: '',
 			},
+			selectedToDelete: 'Выберите имя записи'
 
 		}
 	},
@@ -63,6 +64,10 @@ export default {
 				this.$refs.modal.click();
 			}
 		},
+		deleteLinkFromGroup() {
+			// console.log(this.selectedToDelete);
+			store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete)
+		},
 
 		_checkText(str) {
 			return str.trim().length > 0 ? true : false
@@ -88,7 +93,10 @@ export default {
 				selectedGroup.bookmarksList.sort((a, b) => a.linkOrder - b.linkOrder)
 				return selectedGroup.bookmarksList
 			}
-		}
+		},
+		// selectedLinkToDelete() {
+		// }
+
 
 	},
 	created() {
@@ -198,20 +206,40 @@ export default {
 					</div>
 				</div>
 
+				<PageHeader :msg="'Удаление записи из группы'" />
+				<PageHeader :msg="'(выберите запись	из выпадающего списка и нажмите &laquo;Удалить запись&raquo;)'"
+					:num="6" :tagName="'P'" />
+				<div class="mt-2">
+					<div class="row justify-content-center">
+						<div class="col-10 mb-2">
+							<select class="form-select" aria-label="Default select" v-model="selectedToDelete">
+								<option>Выберите имя записи</option>
+								<option v-for="elem in getSelectedGroupRecord" :value="elem.id" :key="elem.id">{{
+									elem.name
+								}}</option>
+							</select>
+						</div>
+						<button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2"
+							@click="deleteLinkFromGroup">Удалить
+							запись</button>
+					</div>
+				</div>
 
 			</div>
 		</div>
 		<div v-else class="mt-2 text-center">Группа не выбрана, {{ getSelectedGroupRecord.toLowerCase() }}</div>
 	</div>
 
-	<!-- Модальное окно -->
 
+
+
+
+	<!-- Модальное окно -->
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningModal"
 		ref="modal">
 		Launch demo modal
 	</button>
-
 	<!-- Modal -->
 	<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">

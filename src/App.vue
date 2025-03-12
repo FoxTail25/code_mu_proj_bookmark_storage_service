@@ -11,10 +11,7 @@ store.setFirstData()
 </script>
 
 <script>
-export default {
-  mounted() {
-  }
-}
+
 </script>
 
 
@@ -47,6 +44,7 @@ export default {
 .otr {
   transform: scale(1, -1);
 }
+
 footer {
   height: 40px;
   position: sticky;
@@ -54,7 +52,8 @@ footer {
   width: 100%;
   background-color: rgba(102, 102, 102, 0.308);
 }
-.mh-100{
+
+.mh-100 {
   min-height: 100vh;
 }
 

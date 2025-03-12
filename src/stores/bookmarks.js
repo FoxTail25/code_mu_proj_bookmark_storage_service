@@ -92,17 +92,32 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
   };
   function addNewLinkRecord(groupId, newRecordObjData) {
-    console.log(groupId)
-    // console.log(newRecordObjData)
-    // let id = nanoid()
     let newLinkRecord = {
       ...newRecordObjData, id: nanoid(), linkOrder: bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.length, edit: false
-    }
+    };
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord)
-    // console.log(obj)
-    // console.log(newLinkRecord)
   }
+  function deleteLinkFromGroup(groupId, linkId) {
+    console.log('groupId', groupId);
+    console.log(bookmarkArr.value)
+    let groupIndex;
+    let linkIndex;
+    bookmarkArr.value.forEach((e, i) => {
+      if (e.id == groupId) {
+        groupIndex = i;
+      }
+    })
+    bookmarkArr.value[groupIndex].bookmarksList.forEach((e, i) => {
+      if (e.id == linkId) {
+        linkIndex = i
+      }
+    })
 
+    console.log('groupIndex', groupIndex)
+    console.log('linkIndex', linkIndex)
+    let splice = bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
+    console.log('splice', splice);
+  }
 
   return {
     bookmarkArr,
@@ -114,5 +129,6 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     deleteBookmarkGroup,
     changeRecordOrder,
     addNewLinkRecord,
+    deleteLinkFromGroup,
   };
 })
