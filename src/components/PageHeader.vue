@@ -1,22 +1,31 @@
 <script>
 export default {
-	props: {
-		msg: String,
-		num: Number,
-	},
-	computed: {
-		classN() {
-			return this.num
-				? "text-center fs-" + this.num
-				: "text-center fs-4"
-		}
-	}
+  props: {
+    msg: String,
+    num: Number,
+    tagName: String,
+  },
+  computed: {
+    classN() {
+      return this.num
+        ? "text-center fs-" + this.num
+        : "text-center fs-4"
+    },
+    tagN() {
+      if(this.tagName == 'P') {
+        return false
+      } else {
+        return true
+      }
+    },
+  }
 
 }
 </script>
 
 <template>
-	<header>
-		<h2 :class="classN">{{ msg }}</h2>
-	</header>
+  <header  v-if="tagN">
+    <h2 :class="classN">{{ msg }}</h2>
+  </header>
+  <p v-else :class="classN">{{22+  msg }}</p>
 </template>

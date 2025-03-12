@@ -20,7 +20,7 @@ export default {
 
 <template>
 
-  <div class="container">
+  <div class="container mh-100">
 
     <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
 
@@ -39,11 +39,23 @@ export default {
 
     <RouterView />
   </div>
+
+  <!-- <footer>foter</footer> -->
 </template>
 
 <style scoped>
 .otr {
   transform: scale(1, -1);
+}
+footer {
+  height: 40px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(102, 102, 102, 0.308);
+}
+.mh-100{
+  min-height: 100vh;
 }
 
 /* header {

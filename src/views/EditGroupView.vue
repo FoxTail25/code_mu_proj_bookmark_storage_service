@@ -90,7 +90,7 @@ export default {
 
 <template>
   <PageHeader :msg="'Редактирование групп записей'" />
-  <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6" />
+  <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6"  :tagName="'P'"/>
   <!-- Изменение порядка и имени -->
   <!-- <div class="container"> -->
 
@@ -114,14 +114,14 @@ export default {
         <span v-if="!elem.edit" class="f1">
           {{ elem.section_name }}
         </span>
-        <input v-else="!elem.edit" type="text" class="form-control f1" v-model="nameText">
+        <input v-else type="text" class="form-control f1" v-model="nameText">
 
 
         <button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
           @click="editGroupName(elem.id, elem.section_name)" title="Изменить название группы">
           <EditText />
         </button>
-        <button v-else="!elem.edit" class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
+        <button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
           title="сохранить название группы">
           <SaveText />
         </button>
@@ -130,7 +130,7 @@ export default {
   </div>
   <!-- Добавление новой группы -->
   <PageHeader :msg="'Добавление новой группы'" />
-  <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6" />
+  <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6"  :tagName="'P'"/>
   <div class="mt-2 mb-4">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
@@ -141,7 +141,7 @@ export default {
   </div>
   <!-- Удаление группы -->
   <PageHeader :msg="'Удаление группы'" />
-  <PageHeader :msg="'(выберите группу	из выпадающего списка &laquo;Удалить группу&raquo;)'" :num="6" />
+  <PageHeader :msg="'(выберите группу	из выпадающего списка &laquo;Удалить группу&raquo;)'" :num="6" :tagName="'P'"/>
   <div class="mt-2">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
@@ -150,7 +150,7 @@ export default {
           <option v-for="elem in sorted" :value="elem.id" :key="elem.id">{{ elem.section_name }}</option>
         </select>
       </div>
-      <button class="btn btn-danger col-10 col-sm-6 col-md-4" @click="deleteGroup">Удалить группу</button>
+      <button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2" @click="deleteGroup">Удалить группу</button>
     </div>
   </div>
   <!-- </div> -->
