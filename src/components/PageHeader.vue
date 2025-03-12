@@ -12,7 +12,7 @@ export default {
         : "text-center fs-4"
     },
     tagN() {
-      if(this.tagName == 'P') {
+      if (this.tagName == 'P') {
         return false
       } else {
         return true
@@ -24,8 +24,8 @@ export default {
 </script>
 
 <template>
-  <header  v-if="tagN">
+  <header v-if="tagN">
     <h2 :class="classN">{{ msg }}</h2>
   </header>
-  <p v-else :class="classN">{{22+  msg }}</p>
+  <p v-else :class="classN">{{ msg }}</p>
 </template>

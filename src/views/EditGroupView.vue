@@ -61,7 +61,7 @@ export default {
         store.deleteBookmarkGroup(this.selectedToDelete)
       } else {
         console.log('Не выбрана группа')
-        this.showModal()
+        // this.showModal()
       }
     },
 
@@ -69,9 +69,9 @@ export default {
       return str.trim().length > 0 ? str : 'безымянная'
     },
 
-    showModal() {
-      console.log('da')
-    },
+    // showModal() {
+    //   console.log('da')
+    // },
   },
   computed: {
     sorted() {
@@ -90,7 +90,7 @@ export default {
 
 <template>
   <PageHeader :msg="'Редактирование групп записей'" />
-  <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6"  :tagName="'P'"/>
+  <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6" :tagName="'P'" />
   <!-- Изменение порядка и имени -->
   <!-- <div class="container"> -->
 
@@ -130,22 +130,23 @@ export default {
   </div>
   <!-- Добавление новой группы -->
   <PageHeader :msg="'Добавление новой группы'" />
-  <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6"  :tagName="'P'"/>
+  <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6" :tagName="'P'" />
   <div class="mt-2 mb-4">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
         <input type="text" class="form-control" v-model="newGroupName">
       </div>
-      <button class="btn btn-primary col-10 col-sm-6 col-md-4" @click="addNewGroup">Добавить новую группу</button>
+      <button class="btn btn-success col-10 col-sm-6 col-md-4" @click="addNewGroup">Добавить новую группу</button>
     </div>
   </div>
   <!-- Удаление группы -->
   <PageHeader :msg="'Удаление группы'" />
-  <PageHeader :msg="'(выберите группу	из выпадающего списка &laquo;Удалить группу&raquo;)'" :num="6" :tagName="'P'"/>
+  <PageHeader :msg="'(выберите группу	из выпадающего списка и нажмите &laquo;Удалить группу&raquo;)'" :num="6"
+    :tagName="'P'" />
   <div class="mt-2">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
-        <select class="form-select" aria-label="Default select example" v-model="selectedToDelete">
+        <select class="form-select" aria-label="Default select" v-model="selectedToDelete">
           <option>Выберите имя группы</option>
           <option v-for="elem in sorted" :value="elem.id" :key="elem.id">{{ elem.section_name }}</option>
         </select>

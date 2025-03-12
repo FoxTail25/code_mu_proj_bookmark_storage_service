@@ -57,6 +57,31 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
       bookmarksList: []
     });
   };
+
+
+  function changeRecordOrder(groupId, recordId, direct) {
+    let currentIndex;
+    let replaceableIndex;
+    if (direct == 'up') {
+      (bookmarkArr.value.filter(e => e.id == groupId)[0]).bookmarksList.forEach((elem, index) => {
+        if (elem.id == recordId) {
+          currentIndex = index;
+          replaceableIndex = index - 1;
+        }
+      })
+    } else {
+      (bookmarkArr.value.filter(e => e.id == groupId)[0]).bookmarksList.forEach((elem, index) => {
+        if (elem.id == recordId) {
+          currentIndex = index;
+          replaceableIndex = index + 1;
+        }
+      })
+    }
+    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
+    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
+  };
+
+
   function deleteBookmarkGroup(id) {
     // console.log(id);
     let index;
@@ -77,5 +102,6 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     changeGroupName,
     addNewGroup,
     deleteBookmarkGroup,
+    changeRecordOrder,
   };
 })
