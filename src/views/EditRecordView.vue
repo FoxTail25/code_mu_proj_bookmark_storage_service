@@ -80,10 +80,11 @@ export default {
 			this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
 			link.edit = true
 		},
-		saveLinkRecordFromGroup(id) {
+		saveLinkRecordFromGroup(linkId) {
 			let obj = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
-			let link = obj.bookmarksList.filter(e => e.id == id)[0]
-			this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
+			let link = obj.bookmarksList.filter(e => e.id == linkId)[0];
+			// this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
+      store.changeRecordData(this.selectedToEdit, linkId, {...this.editOldLinkRecord})
 			link.edit = false
 		},
 		deleteLinkFromGroup() {

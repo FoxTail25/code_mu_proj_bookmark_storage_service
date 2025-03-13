@@ -91,6 +91,14 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
   };
+  function changeRecordData(groupId, indexId, newData){
+    console.log('group',groupId);
+    console.log('link',indexId);
+    // console.log('newData',newData);
+    let {name: newName,link:newLink, description: newDescription} = {...newData};
+    console.log(newName, newLink, newDescription)
+    console.log(bookmarkArr.value)
+  };
   function addNewLinkRecord(groupId, newRecordObjData) {
     let newLinkRecord = {
       ...newRecordObjData, id: nanoid(), linkOrder: bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.length, edit: false
@@ -126,5 +134,6 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     changeRecordOrder,
     addNewLinkRecord,
     deleteLinkFromGroup,
+    changeRecordData,
   };
 })
