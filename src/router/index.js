@@ -28,12 +28,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: ' /code_mu_proj_bookmark_storage_service/',
+      path: '/code_mu_proj_bookmark_storage_service/',
       name: 'home',
       component: HomeView,
     },
     {
-      path: ' /code_mu_proj_bookmark_storage_service/edit_group',
+      path: '/code_mu_proj_bookmark_storage_service/edit_group',
       name: 'edit_group',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

@@ -23,10 +23,11 @@ store.setFirstData()
 
     <ul class="nav nav-tabs justify-content-center mb-4">
       <li class="nav-item">
-        <RouterLink to="/" class="nav-link">Мои закладки</RouterLink>
+        <RouterLink to="/code_mu_proj_bookmark_storage_service/" class="nav-link">Мои закладки</RouterLink>
       </li>
       <li class="nav-item">
-        <RouterLink to="/edit_group" class="nav-link">Редактирование групп</RouterLink>
+        <RouterLink to="/code_mu_proj_bookmark_storage_service/edit_group" class="nav-link">Редактирование групп
+        </RouterLink>
       </li>
       <li class="nav-item">
         <RouterLink to="/edit_record" class="nav-link">Редактирование записей</RouterLink>
