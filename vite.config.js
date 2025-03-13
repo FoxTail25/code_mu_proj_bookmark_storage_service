@@ -18,5 +18,5 @@ export default defineConfig({
   build: {
     outDir: 'docs'
   },
-  "base": "./code_mu_proj_bookmark_storage_service/"
+  "base": "./"
 })
