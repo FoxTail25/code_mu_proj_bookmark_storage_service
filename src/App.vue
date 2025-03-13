@@ -27,7 +27,6 @@ store.setFirstData();
         </RouterLink>
       </li>
     </ul>
-
     <RouterView />
   </div>
 
