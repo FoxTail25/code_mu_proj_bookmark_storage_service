@@ -34,13 +34,25 @@ store.setFirstData()
         </RouterLink>
       </li>
     </ul>
-    <p><strong>Текущий путь маршрута:</strong> {{ $route.fullPath }}</p>
+    <!-- <p><strong>Текущий путь маршрута:</strong> {{ $route.fullPath }}</p> -->
 
 
     <RouterView />
   </div>
 
-  <!-- <footer>foter</footer> -->
+  <footer >
+    <div class="container">
+      <div class="footer">
+        <div class="copyright">©</div>
+        <div class="author">
+          <a href="https://github.com/FoxTail25" target="_blank" class="author_git"></a>
+          <span>FoxTail25</span>
+          <a href="https://t.me/Siverk" target="_blank" class="author_telegram"></a>
+        </div>
+        <div class="year">2025</div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
@@ -57,7 +69,7 @@ footer {
 }
 
 .mh-100 {
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
 }
 
 /* header {

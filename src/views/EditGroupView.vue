@@ -60,23 +60,17 @@ export default {
       if (this.selectedToDelete != 'Выберите имя группы') {
         store.deleteBookmarkGroup(this.selectedToDelete)
       } else {
-        console.log('Не выбрана группа')
-        // this.showModal()
+        this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
+        this.$refs.dg_modal.click()
       }
     },
-
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
     },
-
-    // showModal() {
-    //   console.log('da')
-    // },
   },
   computed: {
     sorted() {
       this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
-      // console.log('computed', this.bookmarkArr)
       return this.bookmarkArr
     }
   },
@@ -92,8 +86,6 @@ export default {
   <PageHeader :msg="'Редактирование групп записей'" />
   <PageHeader :msg="'(изменение имени и порядка отображения)'" :num="6" :tagName="'P'" />
   <!-- Изменение порядка и имени -->
-  <!-- <div class="container"> -->
-
   <div class="row justify-content-center mb-4">
 
     <ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
@@ -154,7 +146,29 @@ export default {
       <button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2" @click="deleteGroup">Удалить группу</button>
     </div>
   </div>
-  <!-- </div> -->
+  <!-- Модальное окно -->
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningDgModal"
+    ref="dg_modal">
+    Launch demo modal
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="warningDgModal" tabindex="-1" aria-labelledby="warningDgModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="warningDgModalLabel">Не все поля заполнены</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" ref="dg_modalText">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </template>
 

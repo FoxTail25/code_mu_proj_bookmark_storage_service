@@ -3,22 +3,29 @@ import {
   // computed
 } from 'vue'
 import { defineStore } from 'pinia'
-import { dafaultBookmarksArr } from '@/util/defaultBookmarks'
+import { defaultBookmarksArr } from '@/util/defaultBookmarks'
 import { nanoid } from 'nanoid';
+import { localStorageWork } from '@/util/local_stor';
 
 export const useBookmarkStore = defineStore('bookmarks', () => {
   const bookmarkArr = ref([]);
   const name = ref('none');
-  // const sortedBookmarks = computed(() => bookmarkArr.value.sort((a, b) => a.section_order - b.section_order));
-  // const sortedBookmarks = computed(() => console.log('store sorted', bookmarkArr.value));
+
 
   function setFirstData() {
-    name.value = 'default'
-    bookmarkArr.value = [...dafaultBookmarksArr]
+    let localArr = localStorageWork.getRecord();
+    if (!localArr) {
+      name.value = 'default';
+      bookmarkArr.value = [...defaultBookmarksArr];
+      localStorageWork.setRecord([...defaultBookmarksArr]);
+    } else {
+      name.value = 'local';
+      bookmarkArr.value = [...localStorageWork.getRecord()];
+    }
   };
 
+
   function changeGroupOrder(id, direct) {
-    // console.log(id, direct)
     let currentIndex;
     let replaceableIndex;
     if (direct == 'up') {
@@ -39,6 +46,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value[currentIndex].section_order = replaceableIndex;
     bookmarkArr.value[replaceableIndex].section_order = currentIndex;
 
+    localStorageWork.setRecord([...bookmarkArr.value]);
   };
   function changeGroupName(id, name) {
     bookmarkArr.value.forEach(e => {
@@ -46,6 +54,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
         e.section_name = name;
       }
     })
+    localStorageWork.setRecord([...bookmarkArr.value]);
   }
   function addNewGroup(newGroupName) {
     let orderNumber = bookmarkArr.value.length;
@@ -57,17 +66,17 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
       edit: false,
       bookmarksList: []
     });
+    localStorageWork.setRecord([...bookmarkArr.value]);
   };
   function deleteBookmarkGroup(id) {
-    // console.log(id);
     let index;
     bookmarkArr.value.forEach((e, i) => {
       if (e.id == id) {
-        index = i
+        index = i;
       }
     })
-    bookmarkArr.value.splice(index, 1)
-
+    bookmarkArr.value.splice(index, 1);
+    localStorageWork.setRecord([...bookmarkArr.value]);
   };
 
 
@@ -91,6 +100,8 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     }
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
+
+    localStorageWork.setRecord([...bookmarkArr.value]);
   };
   function changeRecordData(groupId, indexId, newData) {
     let { name: newName, link: newLink, description: newDescription } = { ...newData };
@@ -105,16 +116,16 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
         })
       }
     })
+    localStorageWork.setRecord([...bookmarkArr.value]);
   };
   function addNewLinkRecord(groupId, newRecordObjData) {
     let newLinkRecord = {
       ...newRecordObjData, id: nanoid(), linkOrder: bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.length, edit: false
     };
-    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord)
+    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord);
+    localStorageWork.setRecord([...bookmarkArr.value]);
   }
   function deleteLinkFromGroup(groupId, linkId) {
-    // console.log('groupId', groupId);
-    // console.log(bookmarkArr.value)
     let groupIndex;
     let linkIndex;
     bookmarkArr.value.forEach((e, i) => {
@@ -124,10 +135,11 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     })
     bookmarkArr.value[groupIndex].bookmarksList.forEach((e, i) => {
       if (e.id == linkId) {
-        linkIndex = i
+        linkIndex = i;
       }
     })
     bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
+    localStorageWork.setRecord([...bookmarkArr.value]);
   }
 
   return {

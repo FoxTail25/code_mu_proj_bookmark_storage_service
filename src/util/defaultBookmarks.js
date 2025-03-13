@@ -1,5 +1,5 @@
 
-export const dafaultBookmarksArr = [
+export const defaultBookmarksArr = [
 	{
 		id: '6UhgLpttOMgybmJY4fLGH',
 		section_order: 0,
@@ -40,30 +40,6 @@ export const dafaultBookmarksArr = [
 			},
 			{
 				id: '-FzflpDLCVh5aHXsnqKAK',
-				linkOrder: 1,
-				name: 'w3schools css',
-				link: 'https://www.w3schools.com/css/default.asp',
-				description: 'Хороший справочник по css',
-				edit: false,
-			},
-		]
-	},
-	{
-		id: 'I933YNzZZqKmJv1ko_Jjr',
-		section_order: 2,
-		section_name: 'test',
-		edit: false,
-		bookmarksList: [
-			{
-				id: 'Ot2iPgCqI56BZT4rJ9CD3',
-				linkOrder: 0,
-				name: 'Animate.css',
-				link: 'https://animate.style/',
-				description: 'Сайт с готовыми css анимациями',
-				edit: false,
-			},
-			{
-				id: 'sP9GMmXkh_CNIyyHHkovM',
 				linkOrder: 1,
 				name: 'w3schools css',
 				link: 'https://www.w3schools.com/css/default.asp',
