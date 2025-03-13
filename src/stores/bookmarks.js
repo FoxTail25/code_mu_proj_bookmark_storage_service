@@ -16,6 +16,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     name.value = 'default'
     bookmarkArr.value = [...dafaultBookmarksArr]
   };
+
   function changeGroupOrder(id, direct) {
     console.log(id, direct)
     let currentIndex;
@@ -91,13 +92,20 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
   };
-  function changeRecordData(groupId, indexId, newData){
-    console.log('group',groupId);
-    console.log('link',indexId);
-    // console.log('newData',newData);
-    let {name: newName,link:newLink, description: newDescription} = {...newData};
+  function changeRecordData(groupId, indexId, newData) {
+    let { name: newName, link: newLink, description: newDescription } = { ...newData };
     console.log(newName, newLink, newDescription)
-    console.log(bookmarkArr.value)
+    bookmarkArr.value.forEach(e => {
+      if (e.id == groupId) {
+        e.bookmarksList.forEach(e => {
+          if (e.id == indexId) {
+            e.name = newName;
+            e.link = newLink;
+            e.description = newDescription;
+          }
+        })
+      }
+    })
   };
   function addNewLinkRecord(groupId, newRecordObjData) {
     let newLinkRecord = {
