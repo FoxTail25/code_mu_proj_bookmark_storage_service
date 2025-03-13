@@ -28,12 +28,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/code_mu_proj_bookmark_storage_service/',
+      path: '/',
       name: 'home',
       component: HomeView,
     },
     {
-      path: '/code_mu_proj_bookmark_storage_service/edit_group',
+      path: '/edit_group',
       name: 'edit_group',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -41,7 +41,7 @@ const router = createRouter({
       component: () => import('../views/EditGroupView.vue'),
     },
     {
-      path: ' /code_mu_proj_bookmark_storage_service/edit_record',
+      path: '/edit_record',
       name: 'edit_record',
       component: () => import('../views/EditRecordView.vue'),
     },
