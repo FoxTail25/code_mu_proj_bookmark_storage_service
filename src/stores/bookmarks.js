@@ -18,7 +18,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   };
 
   function changeGroupOrder(id, direct) {
-    console.log(id, direct)
+    // console.log(id, direct)
     let currentIndex;
     let replaceableIndex;
     if (direct == 'up') {
@@ -94,7 +94,6 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   };
   function changeRecordData(groupId, indexId, newData) {
     let { name: newName, link: newLink, description: newDescription } = { ...newData };
-    console.log(newName, newLink, newDescription)
     bookmarkArr.value.forEach(e => {
       if (e.id == groupId) {
         e.bookmarksList.forEach(e => {
