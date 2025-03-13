@@ -5,7 +5,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/code_mu_proj_bookmark_storage_service/#/',
+      path: '/',
       name: 'home',
       component: HomeView,
     },
