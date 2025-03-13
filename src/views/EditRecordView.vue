@@ -25,7 +25,6 @@ export default {
 				name: '',
 				description: '',
 			},
-
 		}
 	},
 	methods: {
@@ -76,20 +75,18 @@ export default {
 		},
 		editLinkRecordFromGroup(id) {
 			let obj = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
-			let link = obj.bookmarksList.filter(e => e.id == id)[0]
+			let link = obj.bookmarksList.filter(e => e.id == id)[0];
 			this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
-			link.edit = true
+			link.edit = true;
 		},
 		saveLinkRecordFromGroup(linkId) {
 			let obj = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
 			let link = obj.bookmarksList.filter(e => e.id == linkId)[0];
-			// this.editOldLinkRecord = { name: link.name, description: link.description, link: link.link };
-      store.changeRecordData(this.selectedToEdit, linkId, {...this.editOldLinkRecord})
-			link.edit = false
+			store.changeRecordData(this.selectedToEdit, linkId, { ...this.editOldLinkRecord });
+			link.edit = false;
 		},
 		deleteLinkFromGroup() {
-			// console.log(this.selectedToDelete);
-			store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete)
+			store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete);
 		},
 
 		_checkText(str) {
@@ -99,7 +96,7 @@ export default {
 	computed: {
 		sorted() {
 			this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
-			console.log(this.bookmarkArr)
+			console.log(this.bookmarkArr);
 			return this.bookmarkArr
 		},
 		group_selected() {
@@ -112,15 +109,15 @@ export default {
 			if (this.selectedToEdit == 'Выберите имя группы') {
 				return this.selectedToEdit
 			} else {
-				let selectedGroup = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0]
-				selectedGroup.bookmarksList.sort((a, b) => a.linkOrder - b.linkOrder)
+				let selectedGroup = this.bookmarkArr.filter(e => e.id == this.selectedToEdit)[0];
+				selectedGroup.bookmarksList.sort((a, b) => a.linkOrder - b.linkOrder);
 				return selectedGroup.bookmarksList
 			}
 		},
 	},
 	created() {
 		store = useBookmarkStore();
-		this.bookmarkArr = store.bookmarkArr
+		this.bookmarkArr = store.bookmarkArr;
 	}
 }
 </script>
@@ -172,8 +169,8 @@ export default {
 									@click="editLinkRecordFromGroup(elem.id)" title="Отредактировать запись">
 									<EditText />
 								</button>
-								<button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveLinkRecordFromGroup(elem.id)"
-									title="сохранить запись">
+								<button v-else class="btn btn-primary p-1 m-1 lh-1"
+									@click="saveLinkRecordFromGroup(elem.id)" title="сохранить запись">
 									<SaveText />
 								</button>
 							</div>

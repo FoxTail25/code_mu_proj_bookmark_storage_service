@@ -5,7 +5,6 @@ class localStor {
 	}
 	setRecord(data) {
 		localStorage.setItem(this.name, this._getString(data));
-		console.log('сохранил данные')
 	}
 	getRecord() {
 		return this._checkRecord(this.name)

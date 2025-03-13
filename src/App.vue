@@ -1,22 +1,13 @@
 <script setup>
-// import { nanoid } from 'nanoid';
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
 
-// console.log(nanoid())
-const store = useBookmarkStore()
-store.setFirstData()
-
+const store = useBookmarkStore();
+store.setFirstData();
 </script>
-
-<script>
-
-</script>
-
 
 <template>
-
   <div class="container mh-100">
 
     <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
@@ -36,11 +27,10 @@ store.setFirstData()
     </ul>
     <!-- <p><strong>Текущий путь маршрута:</strong> {{ $route.fullPath }}</p> -->
 
-
     <RouterView />
   </div>
 
-  <footer >
+  <footer>
     <div class="container">
       <div class="footer">
         <div class="copyright">©</div>
@@ -56,81 +46,17 @@ store.setFirstData()
 </template>
 
 <style scoped>
-.otr {
-  transform: scale(1, -1);
-}
-
 footer {
-  height: 40px;
-  position: sticky;
+  height: 30px;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: rgba(102, 102, 102, 0.308);
+  background-color: rgba(236, 236, 236, .3);
+  display: flex;
+  align-items: center;
 }
 
 .mh-100 {
-  min-height: calc(100vh - 40px);
+  min-height: calc(100vh - 30px);
 }
-
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
 </style>

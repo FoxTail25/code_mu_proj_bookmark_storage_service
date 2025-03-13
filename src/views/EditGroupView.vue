@@ -47,21 +47,21 @@ export default {
           e.edit = false;
         }
       })
-      let newName = this._checkText(this.nameText)
-      store.changeGroupName(elemId, newName)
+      let newName = this._checkText(this.nameText);
+      store.changeGroupName(elemId, newName);
       this.nameText = '';
     },
     addNewGroup() {
-      let newName = this._checkText(this.newGroupName)
-      store.addNewGroup(newName)
-      this.newGroupName = ''
+      let newName = this._checkText(this.newGroupName);
+      store.addNewGroup(newName);
+      this.newGroupName = '';
     },
     deleteGroup() {
       if (this.selectedToDelete != 'Выберите имя группы') {
-        store.deleteBookmarkGroup(this.selectedToDelete)
+        store.deleteBookmarkGroup(this.selectedToDelete);
       } else {
         this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
-        this.$refs.dg_modal.click()
+        this.$refs.dg_modal.click();
       }
     },
     _checkText(str) {
@@ -77,7 +77,7 @@ export default {
 
   created() {
     store = useBookmarkStore();
-    this.bookmarkArr = store.bookmarkArr
+    this.bookmarkArr = store.bookmarkArr;
   }
 }
 </script>

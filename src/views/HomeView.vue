@@ -21,14 +21,14 @@ export default {
   },
   methods: {
     getFav(path) {
-      return getFavicon(path)
+      return getFavicon(path);
     }
   },
   mounted() {
     this.bookmarks = [...store.bookmarkArr];
   },
   created() {
-    store = useBookmarkStore()
+    store = useBookmarkStore();
   }
 }
 </script>

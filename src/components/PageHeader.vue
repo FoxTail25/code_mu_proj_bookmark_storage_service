@@ -9,7 +9,7 @@ export default {
     classN() {
       return this.num
         ? "text-center fs-" + this.num
-        : "text-center fs-4"
+        : "text-center fs-4";
     },
     tagN() {
       if (this.tagName == 'P') {
