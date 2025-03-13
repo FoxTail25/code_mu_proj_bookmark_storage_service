@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/edit_group',
+      path: '/code_mu_proj_bookmark_storage_service/edit_group',
       name: 'edit_group',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -18,7 +18,7 @@ const router = createRouter({
       component: () => import('../views/EditGroupView.vue'),
     },
     {
-      path: '/edit_record',
+      path: '/code_mu_proj_bookmark_storage_service/edit_record',
       name: 'edit_record',
       component: () => import('../views/EditRecordView.vue'),
     },
