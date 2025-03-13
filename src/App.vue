@@ -32,6 +32,7 @@ store.setFirstData()
         <RouterLink to="/edit_record" class="nav-link">Редактирование записей</RouterLink>
       </li>
     </ul>
+    <p><strong>Текущий путь маршрута:</strong> {{ $route.fullPath }}</p>
 
 
     <RouterView />
