@@ -31,7 +31,8 @@ export default {
       }, [])
       // console.log(arr)
       this.searchingArr = arr.filter(el => (el.link.includes(this.searchString) || el.name.includes(this.searchString) || el.description.includes(this.searchString)))
-      console.log(this.searchingArr)
+      // console.log(this.searchingArr);
+      return '';
     },
     searchAnswerVisible() {
       console.log(this.searchingArr.length)
