@@ -21,21 +21,21 @@ export default {
       return sortedBookmarks
     },
     search() {
-      console.log(this.searchString);
       let arr = this.bookmarks.reduce((acc, obj) => {
         let arrLinks = obj.bookmarksList;
         arrLinks.forEach(element => {
-          acc.push(element)
+          acc.push(element);
         });
         return acc
       }, [])
-      // console.log(arr)
-      this.searchingArr = arr.filter(el => (el.link.includes(this.searchString) || el.name.includes(this.searchString) || el.description.includes(this.searchString)))
-      // console.log(this.searchingArr);
-      return '';
+      let searchStr = this.searchString.toLowerCase();
+      this.searchingArr = arr.filter(el => {
+        return ((el.link.toLowerCase()).includes(searchStr) || (el.name.toLowerCase()).includes(searchStr) || (el.description.toLowerCase()).includes(searchStr));
+      })
+      return ''
     },
     searchAnswerVisible() {
-      console.log(this.searchingArr.length)
+      // console.log(this.searchingArr.length)
       return this.searchingArr.length > 0 && this.searchString != ""
         ? true
         : false
@@ -68,12 +68,25 @@ export default {
       <div class="col-12">
 
         <p>есть {{ searchingArr.length }} {{ searchingArr.length > 1 ? "записи" : "запись" }}</p>
-        <div v-for="elem in searchingArr" key="elem.id" class="mb-4">
-          <a :href="elem.link" target="_blank" :title="elem.description">
-            <!-- <img :src="getFav(item.link)" alt="favicon" width="16px" height="16px" class="p-6"> -->
-            {{ elem.name }}
-          </a>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Ссылка</th>
+              <th scope="col">Название</th>
+              <th scope="col">Описание</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(elem, ind) in searchingArr" :key="elem.id" class="mb-4">
+              <th scope="row">{{ ind }}</th>
+              <td><a :href="elem.link">{{ elem.link }}</a></td>
+              <td>{{ elem.name }}</td>
+              <td>{{ elem.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
     <div class="row g-2">
