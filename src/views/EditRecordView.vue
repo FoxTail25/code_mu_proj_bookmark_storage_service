@@ -45,14 +45,11 @@ export default {
 		addNewLinkInGroup() {
 			let blankField = false;
 			for (let record in this.editNewLinkRecord) {
-
 				if (record == 'link') {
-
 					if (!this._checkLink(this.editNewLinkRecord[record])) {
 						blankField = record;
 						break
 					}
-
 				} else {
 					if (!this._checkText(this.editNewLinkRecord[record])) {
 						blankField = record;
@@ -171,11 +168,12 @@ export default {
 		<div v-if="group_selected" class="mt-2">
 			<div class="row justify-content-center">
 
-				<ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8 mb-4">
-					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id" class="list-group-item d-flex">
+				<ol class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
+					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id"
+						class="list-group-item d-flex px-1 px-sm-2">
 
 						<div class="row w-100">
-							<div class="col-12 d-flex align-items-center justify-content-between">
+							<div class="col-12 d-flex align-items-center justify-content-between pe-0 ps-sm-3">
 
 
 								<span>
