@@ -35,11 +35,11 @@ export default {
       return ''
     },
     searchAnswerVisible() {
-      // console.log(this.searchingArr.length)
       return this.searchingArr.length > 0 && this.searchString != ""
         ? true
         : false
     }
+    
   },
   methods: {
     getFav(path) {
@@ -62,13 +62,14 @@ export default {
   <main class="container">
 
 
-    <label for="searcher" class="form-label">Поиск по закладкам</label>
-    <input type="search" id="searcher" class="form-control mb-1" v-model="searchString" @input="search">
+    <label for="searcher" class="form-label mb-0">Поиск по закладкам</label>
+    <input type="search" id="searcher" class="form-control mb-2" v-model="searchString" @input="search"
+      placeholder="введите символы для поиска по записям">
     <div v-if="searchAnswerVisible" class="row">
       <div class="col-12">
 
         <p>есть {{ searchingArr.length }} {{ searchingArr.length > 1 ? "записи" : "запись" }}</p>
-        <table class="table">
+        <table class="table mb-4">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -80,7 +81,7 @@ export default {
           <tbody>
             <tr v-for="(elem, ind) in searchingArr" :key="elem.id" class="mb-4">
               <th scope="row">{{ ind }}</th>
-              <td><a :href="elem.link">{{ elem.link }}</a></td>
+              <td><a :href="elem.link" target="_blank">{{ elem.link }}</a></td>
               <td>{{ elem.name }}</td>
               <td>{{ elem.description }}</td>
             </tr>
