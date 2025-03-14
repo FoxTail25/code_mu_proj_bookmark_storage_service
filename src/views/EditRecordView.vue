@@ -61,7 +61,6 @@ export default {
 				}
 			}
 			if (!blankField) {
-				console.log('!все поля заполнены!');
 				store.addNewLinkRecord(this.selectedToEdit, this.editNewLinkRecord);
 				this.editNewLinkRecord = {
 					link: '',
@@ -115,21 +114,16 @@ export default {
 			return answer
 		},
 		warningModalClose() {
-			// console.log('warModClose');
-			console.log(this.warningModalCloseLink);
 			switch (this.warningModalCloseLink) {
 				case 'link': this.$refs.link.focus(); break
 				case 'name': this.$refs.name.focus(); break
 				case 'description': this.$refs.description.focus(); break
 			}
-
 		}
-
 	},
 	computed: {
 		sorted() {
 			this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
-			console.log(this.bookmarkArr);
 			return this.bookmarkArr
 		},
 		group_selected() {
@@ -329,11 +323,6 @@ export default {
 		</div>
 		<div v-else class="mt-2 text-center">Группа не выбрана, {{ getSelectedGroupRecord.toLowerCase() }}</div>
 	</div>
-
-
-
-
-
 	<!-- Модальное окно -->
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningModal"
@@ -358,10 +347,6 @@ export default {
 			</div>
 		</div>
 	</div>
-
-
-
-
 </template>
 
 <style>
