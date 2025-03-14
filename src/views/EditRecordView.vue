@@ -25,6 +25,7 @@ export default {
 				name: '',
 				description: '',
 			},
+			warningModalCloseLink: '',
 		}
 	},
 	methods: {
@@ -73,14 +74,17 @@ export default {
 					case 'link': errorMessage = `<span class="fst-italic">поле</span>
 				<span class="fw-medium fst-normal">Link</span>
 				 <span class="text-danger">Должно начинаться с <span class="fw-medium fst-normal">http://</span> или с <span class="fw-medium fst-normal">https://</span></span>`;
+						this.warningModalCloseLink = 'link';
 						break
 					case 'name': errorMessage = `<span class="fst-italic">поле </span>
 				<span class="fw-medium fst-normal">Имя</span>
 				 <span class="text-danger">не заполнено!</span>`;
+						this.warningModalCloseLink = 'name';
 						break
 					case 'description': errorMessage = `<span class="fst-italic">поле </span>
 				<span class="fw-medium fst-normal">Title</span>
 				 <span class="text-danger">не заполнено!</span>`;
+						this.warningModalCloseLink = 'description';
 						break
 				}
 				this.$refs.modalText.innerHTML = errorMessage;
@@ -109,7 +113,18 @@ export default {
 		_checkLink(str) {
 			let answer = /^https:\/\/|^http:\/\//.test(str);
 			return answer
+		},
+		warningModalClose() {
+			// console.log('warModClose');
+			console.log(this.warningModalCloseLink);
+			switch (this.warningModalCloseLink) {
+				case 'link': this.$refs.link.focus(); break
+				case 'name': this.$refs.name.focus(); break
+				case 'description': this.$refs.description.focus(); break
+			}
+
 		}
+
 	},
 	computed: {
 		sorted() {
@@ -247,7 +262,7 @@ export default {
 				<PageHeader :msg="'(Заполните обязательные поля и нажмите &laquo;Добавить запись в группу&raquo;)'"
 					:num="6" :tagName="'P'" />
 				<div class="row g-1 justify-content-center">
-					<div class="input-group mb-1 justify-content-center">
+					<div class="input-group mb-0 justify-content-center">
 						<div class="col-12 col-sm-10 mb-2">
 							<label for="inputLink" class="row g-1">
 								<div class="col-3 col-sm-2 col-md-1">
@@ -256,7 +271,7 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Адрес ссылки"
 										aria-label="Username" aria-describedby="basic-addon1" id="inputLink"
-										v-model="editNewLinkRecord.link">
+										v-model="editNewLinkRecord.link" ref="link">
 								</div>
 							</label>
 						</div>
@@ -268,7 +283,7 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Отображаемое название"
 										aria-label="Username" aria-describedby="basic-addon2" id="inputName"
-										v-model="editNewLinkRecord.name">
+										v-model="editNewLinkRecord.name" ref="name">
 								</div>
 							</label>
 						</div>
@@ -280,13 +295,13 @@ export default {
 								<div class="col-9 col-sm-10 col-md-11">
 									<input type="text" class="form-control" placeholder="Описание" aria-label="Username"
 										aria-describedby="basic-addon3" id="inputDescription"
-										v-model="editNewLinkRecord.description">
+										v-model="editNewLinkRecord.description" ref="description">
 								</div>
 							</label>
 						</div>
 
 					</div>
-					<div class="col-10 text-center mb-4">
+					<div class="col-10 text-center mb-4 my-0">
 						<button class="btn btn-success" @click="addNewLinkInGroup">Добавить ссылку в группу</button>
 					</div>
 				</div>
@@ -326,7 +341,8 @@ export default {
 		Launch demo modal
 	</button>
 	<!-- Modal -->
-	<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+	<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true"
+		@click="warningModalClose">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -337,7 +353,7 @@ export default {
 					...
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Исправить</button>
 				</div>
 			</div>
 		</div>

@@ -71,7 +71,7 @@ export default {
   <main class="container">
 
 
-    <label for="searcher" class="form-label mb-0"
+    <label for="searcher" class="form-label mb-0 text-center w-100"
       title="Поиск ведётся без учёта регистра! т.е. если вы ищете 'Аб' - то будут найдены 'Аб','АБ','аБ'и'аб'">Поиск по
       закладкам</label>
     <input type=" search" id="searcher" class="form-control mb-2" v-model="searchString" @input="search"
