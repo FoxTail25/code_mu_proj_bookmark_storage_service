@@ -45,6 +45,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     }
     bookmarkArr.value[currentIndex].section_order = replaceableIndex;
     bookmarkArr.value[replaceableIndex].section_order = currentIndex;
+    bookmarkArr.value.sort((a, b) => a.section_order - b.section_order);
 
     localStorageWork.setRecord([...bookmarkArr.value]);
   };
@@ -100,6 +101,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     }
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[currentIndex].linkOrder = replaceableIndex;
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList[replaceableIndex].linkOrder = currentIndex;
+    bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.sort((a, b) => a.linkOrder - b.linkOrder)
 
     localStorageWork.setRecord([...bookmarkArr.value]);
   };

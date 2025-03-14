@@ -44,9 +44,19 @@ export default {
 		addNewLinkInGroup() {
 			let blankField = false;
 			for (let record in this.editNewLinkRecord) {
-				if (!this._checkText(this.editNewLinkRecord[record])) {
-					blankField = record;
-					break
+
+				if (record == 'link') {
+
+					if (!this._checkLink(this.editNewLinkRecord[record])) {
+						blankField = record;
+						break
+					}
+
+				} else {
+					if (!this._checkText(this.editNewLinkRecord[record])) {
+						blankField = record;
+						break
+					}
 				}
 			}
 			if (!blankField) {
@@ -58,18 +68,22 @@ export default {
 					description: '',
 				};
 			} else {
-				let blankFildName;
+				let errorMessage;
 				switch (blankField) {
-					case 'link': blankFildName = 'Link'
+					case 'link': errorMessage = `<span class="fst-italic">поле</span>
+				<span class="fw-medium fst-normal">Link</span>
+				 <span class="text-danger">Должно начинаться с <span class="fw-medium fst-normal">http://</span> или с <span class="fw-medium fst-normal">https://</span></span>`;
 						break
-					case 'name': blankFildName = 'Имя'
+					case 'name': errorMessage = `<span class="fst-italic">поле </span>
+				<span class="fw-medium fst-normal">Имя</span>
+				 <span class="text-danger">не заполнено!</span>`;
 						break
-					case 'description': blankFildName = 'Title'
+					case 'description': errorMessage = `<span class="fst-italic">поле </span>
+				<span class="fw-medium fst-normal">Title</span>
+				 <span class="text-danger">не заполнено!</span>`;
 						break
 				}
-				this.$refs.modalText.innerHTML = `<span class="fst-italic">поле </span>
-				<span class="fw-medium fst-normal">${blankFildName}</span>
-				 <span class="text-danger">не заполнено!</span>`;
+				this.$refs.modalText.innerHTML = errorMessage;
 				this.$refs.modal.click();
 			}
 		},
@@ -92,6 +106,10 @@ export default {
 		_checkText(str) {
 			return str.trim().length > 0 ? true : false
 		},
+		_checkLink(str) {
+			let answer = /^https:\/\/|^http:\/\//.test(str);
+			return answer
+		}
 	},
 	computed: {
 		sorted() {
@@ -174,12 +192,7 @@ export default {
 									<SaveText />
 								</button>
 							</div>
-							<!-- <div v-if="elem.edit" class="col-12">
 
-								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.link">
-								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.name">
-								<input type="text" class="form-control f1 my-1" v-model="editOldLinkRecord.description">
-							</div> -->
 
 							<div v-if="elem.edit" class="row g-1 justify-content-center">
 								<div class="input-group mb-1 ">

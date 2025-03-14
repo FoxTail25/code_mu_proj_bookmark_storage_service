@@ -71,9 +71,12 @@ export default {
   <main class="container">
 
 
-    <label for="searcher" class="form-label mb-0">Поиск по закладкам</label>
-    <input type="search" id="searcher" class="form-control mb-2" v-model="searchString" @input="search"
-      placeholder="введите символы для поиска по записям">
+    <label for="searcher" class="form-label mb-0"
+      title="Поиск ведётся без учёта регистра! т.е. если вы ищете 'Аб' - то будут найдены 'Аб','АБ','аБ'и'аб'">Поиск по
+      закладкам</label>
+    <input type=" search" id="searcher" class="form-control mb-2" v-model="searchString" @input="search"
+      placeholder="введите символы для поиска по записям"
+      title="Поиск ведётся без учёта регистра! т.е. если вы ищете 'Аб' - то будут найдены 'Аб','АБ','аБ'и'аб'">
     <div v-if="searchAnswerVisible" class="row">
       <div class="col-12">
 
