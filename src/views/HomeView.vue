@@ -38,13 +38,22 @@ export default {
       return this.searchingArr.length > 0 && this.searchString != ""
         ? true
         : false
-    }
-    
+    },
+
   },
   methods: {
     getFav(path) {
       return getFavicon(path);
-    }
+    },
+    highlightedText(str) {
+      let incomStrLowerCase = str.toLowerCase()
+      let searchStr = this.searchString.toLowerCase()
+      let newStr = str;
+      if (incomStrLowerCase.includes(searchStr)) {
+        newStr = incomStrLowerCase.replace(searchStr, `<span class="text-bg-success">${searchStr}</span>`);
+      }
+      return newStr
+    },
   },
   mounted() {
     this.bookmarks = [...store.bookmarkArr];
@@ -81,9 +90,9 @@ export default {
           <tbody>
             <tr v-for="(elem, ind) in searchingArr" :key="elem.id" class="mb-4">
               <th scope="row">{{ ind }}</th>
-              <td><a :href="elem.link" target="_blank">{{ elem.link }}</a></td>
-              <td>{{ elem.name }}</td>
-              <td>{{ elem.description }}</td>
+              <td><a :href="elem.link" target="_blank" v-html="highlightedText(elem.link)"></a></td>
+              <td v-html="highlightedText(elem.name)"></td>
+              <td v-html="highlightedText(elem.description)"></td>
             </tr>
           </tbody>
         </table>
@@ -110,5 +119,4 @@ export default {
     </div>
 
   </main>
-
 </template>

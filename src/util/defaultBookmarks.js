@@ -11,7 +11,7 @@ export const defaultBookmarksArr = [
 				linkOrder: 0,
 				name: 'code.mu',
 				link: 'https://code.mu/ru/',
-				description: 'Лучший сайт по изучению программированию',
+				description: 'Лучший сайт по изучению программирования',
 				edit: false,
 			},
 			{
@@ -19,7 +19,7 @@ export const defaultBookmarksArr = [
 				linkOrder: 1,
 				name: 'w3schools',
 				link: 'https://www.w3schools.com/',
-				description: 'не плохой сайт по изучению программированию',
+				description: 'не плохой сайт по изучению программирования',
 				edit: false,
 			},
 		]
