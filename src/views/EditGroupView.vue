@@ -88,7 +88,7 @@ export default {
   <!-- Изменение порядка и имени -->
   <div class="row justify-content-center mb-4">
 
-    <ol class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
+    <TransitionGroup name="list" tag="ol" class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
       <li v-for="(elem) in sorted" :key="elem.id"
         class="list-group-item d-flex align-items-center justify-content-between">
 
@@ -118,7 +118,7 @@ export default {
           <SaveText />
         </button>
       </li>
-    </ol>
+    </TransitionGroup>
   </div>
   <!-- Добавление новой группы -->
   <PageHeader :msg="'Добавление новой группы'" />
@@ -175,5 +175,22 @@ export default {
 <style>
 .f1 {
   flex: 1;
+}
+.list-move, /* применять переход к движущимся элементам */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* убедитесь, что удаляющиеся элементы выведены из потока, чтобы
+анимации перемещения могли быть рассчитаны правильно. */
+.list-leave-active {
+  position: static;
 }
 </style>

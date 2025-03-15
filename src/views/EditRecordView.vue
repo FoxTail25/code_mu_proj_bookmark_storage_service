@@ -168,13 +168,12 @@ export default {
 		<div v-if="group_selected" class="mt-2">
 			<div class="row justify-content-center">
 
-				<ol class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
+				<TransitionGroup name="list" tag="ol" class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
 					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id"
 						class="list-group-item d-flex px-1 px-sm-2">
 
 						<div class="row w-100">
 							<div class="col-12 d-flex align-items-center justify-content-between pe-0 ps-sm-3">
-
 
 								<span>
 									<button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
@@ -199,7 +198,6 @@ export default {
 									<SaveText />
 								</button>
 							</div>
-
 
 							<div v-if="elem.edit" class="row g-1 justify-content-center">
 								<div class="input-group mb-1 ">
@@ -244,11 +242,9 @@ export default {
 								</div>
 							</div>
 
-
-
 						</div>
 					</li>
-				</ol>
+				</TransitionGroup>
 
 				<PageHeader :msg="'Добавить новую запись в группу'" />
 				<PageHeader :msg="'(Заполните обязательные поля и нажмите &laquo;Добавить запись в группу&raquo;)'"
@@ -350,5 +346,22 @@ export default {
 <style>
 .f1 {
 	flex: 1;
+}
+.list-move, /* применять переход к движущимся элементам */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* убедитесь, что удаляющиеся элементы выведены из потока, чтобы
+анимации перемещения могли быть рассчитаны правильно. */
+.list-leave-active {
+  position: static;
 }
 </style>
