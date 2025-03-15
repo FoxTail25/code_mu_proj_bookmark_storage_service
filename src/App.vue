@@ -1,9 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+// import { RouterLink, RouterView } from 'vue-router';
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
 import ProjInfo from './components/ProjInfo.vue';
 import Question from './components/icon/Question.vue';
+import HomeView from './views/HomeView.vue';
+import EditGroupView from './views/EditGroupView.vue';
+import EditRecordView from './views/EditRecordView.vue';
 
 const store = useBookmarkStore();
 store.setFirstData();
@@ -13,7 +16,8 @@ store.setFirstData();
   <div class="container mh-100">
 
     <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
-
+    <!-- Старая рабочая версия (Vue-router) -->
+    <!--
     <ul class="nav nav-tabs justify-content-center mb-4">
       <li class="nav-item">
         <RouterLink to="/" class="nav-link">Мои закладки</RouterLink>
@@ -28,6 +32,40 @@ store.setFirstData();
       </li>
     </ul>
     <RouterView />
+     -->
+
+      <ul class="nav nav-tabs justify-content-center mb-4">
+
+        <li class="nav-item">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+            class="active bg-warning" aria-current="true" aria-label="Slide 1">1</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
+            class="bg-warning">2</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
+            class="bg-warning">3</button>
+        </li>
+      </ul>
+
+
+    <div id="carouselExampleIndicators" class="carousel slide transit">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <HomeView />
+        </div>
+        <div class="carousel-item">
+          <EditGroupView />
+        </div>
+        <div class="carousel-item">
+          <EditRecordView />
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <footer>
@@ -72,6 +110,10 @@ store.setFirstData();
 </template>
 
 <style scoped>
+.trnsit {
+  transition: 0.2s;
+  transition-duration: 0.2s;
+}
 footer {
   height: 30px;
   position: fixed;
