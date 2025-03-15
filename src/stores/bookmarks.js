@@ -77,6 +77,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
       }
     })
     bookmarkArr.value.splice(index, 1);
+    bookmarkArr.value.forEach((e, i)=> e.section_order = i)
     localStorageWork.setRecord([...bookmarkArr.value]);
   };
 
