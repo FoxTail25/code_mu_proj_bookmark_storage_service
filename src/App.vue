@@ -7,9 +7,33 @@ import Question from './components/icon/Question.vue';
 import HomeView from './views/HomeView.vue';
 import EditGroupView from './views/EditGroupView.vue';
 import EditRecordView from './views/EditRecordView.vue';
+import { ref } from 'vue';
 
 const store = useBookmarkStore();
 store.setFirstData();
+</script>
+
+<script>
+export default {
+  methods: {
+    changeActivTab(name) {
+      let refObj = { ...this.$refs }
+      if (![...refObj[name].classList].includes('active')) {
+        for (let ref in refObj) {
+          if (name == ref) {
+            if (![...refObj[ref].classList].includes('active')) {
+              refObj[ref].classList.add('active')
+            }
+          } else {
+            if ([...refObj[ref].classList].includes('active')) {
+              refObj[ref].classList.remove('active')
+            }
+          }
+        };
+      }
+    }
+  }
+}
 </script>
 
 <template>
@@ -38,15 +62,16 @@ store.setFirstData();
 
       <li class="nav-item">
         <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="0" class="nav-link active "
-          aria-current="true" aria-label="Slide 1">Мои закладки</button>
+          aria-current="true" aria-label="Slide 1" @click="changeActivTab('myBookmark')" ref="myBookmark">Мои
+          закладки</button>
       </li>
       <li class="nav-item">
-        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="1" aria-label="Slide 2"
-          class="nav-link">Редактирование групп</button>
+        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="1" aria-label="Slide 2" class="nav-link"
+          @click="changeActivTab('editGroup')" ref="editGroup">Редактирование групп</button>
       </li>
       <li class="nav-item">
-        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="2" aria-label="Slide 3"
-          class="nav-link">Редактирование записей</button>
+        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="2" aria-label="Slide 3" class="nav-link"
+          @click="changeActivTab('editLink')" ref="editLink">Редактирование записей</button>
       </li>
     </ul>
 
