@@ -1,5 +1,4 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router';
 import { useBookmarkStore } from './stores/bookmarks';
 import PageHeader from './components/PageHeader.vue';
 import ProjInfo from './components/ProjInfo.vue';
@@ -7,7 +6,6 @@ import Question from './components/icon/Question.vue';
 import HomeView from './views/HomeView.vue';
 import EditGroupView from './views/EditGroupView.vue';
 import EditRecordView from './views/EditRecordView.vue';
-import { ref } from 'vue';
 
 const store = useBookmarkStore();
 store.setFirstData();
@@ -17,21 +15,21 @@ store.setFirstData();
 export default {
   methods: {
     changeActivTab(name) {
-      let refObj = { ...this.$refs }
+      let refObj = { ...this.$refs };
       if (![...refObj[name].classList].includes('active')) {
         for (let ref in refObj) {
           if (name == ref) {
             if (![...refObj[ref].classList].includes('active')) {
-              refObj[ref].classList.add('active')
+              refObj[ref].classList.add('active');
             }
           } else {
             if ([...refObj[ref].classList].includes('active')) {
-              refObj[ref].classList.remove('active')
+              refObj[ref].classList.remove('active');
             }
-          }
+          };
         };
-      }
-    }
+      };
+    },
   }
 }
 </script>
@@ -40,24 +38,7 @@ export default {
   <div class="container mh-100">
 
     <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
-    <!-- Старая рабочая версия (Vue-router) -->
-    <!--
-    <ul class="nav nav-tabs justify-content-center mb-4">
-      <li class="nav-item">
-        <RouterLink to="/" class="nav-link">Мои закладки</RouterLink>
-      </li>
-      <li class="nav-item">
-        <RouterLink to="/edit_group" class="nav-link">Редактирование групп
-        </RouterLink>
-      </li>
-      <li class="nav-item">
-        <RouterLink to="/edit_record" class="nav-link">Редактирование записей
-        </RouterLink>
-      </li>
-    </ul>
-    <RouterView />
-     -->
-
+ 
     <ul class="nav nav-tabs justify-content-center mb-4">
 
       <li class="nav-item">
@@ -74,7 +55,6 @@ export default {
           @click="changeActivTab('editLink')" ref="editLink">Редактирование записей</button>
       </li>
     </ul>
-
 
     <div id="caruselChange" class="carousel slide mb-4">
 
@@ -107,7 +87,6 @@ export default {
     </div>
   </footer>
 
-
   <!-- Button trigger modal -->
   <button type="button" class="question" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     <Question />
@@ -136,7 +115,7 @@ export default {
 
 <style scoped>
 .transit {
-  transition: transform .2s ease
+  transition: .2s ease-in-out;
 }
 
 footer {
