@@ -38,7 +38,7 @@ export default {
   <div class="container mh-100">
 
     <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
- 
+
     <ul class="nav nav-tabs justify-content-center mb-4">
 
       <li class="nav-item">
