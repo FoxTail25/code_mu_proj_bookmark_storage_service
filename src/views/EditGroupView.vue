@@ -89,7 +89,8 @@ export default {
   <!-- Изменение порядка и имени -->
   <div class="row justify-content-center mb-4">
 
-    <TransitionGroup name="list" tag="ol" class="list-group list-group-numbered col-12 col-md-10 col-md-10 col-lg-8">
+    <TransitionGroup name="list" tag="ol"
+      class="list-group list-group-numbered col-11 col-md-10 col-md-10 col-lg-8 px-0">
       <li v-for="(elem) in sorted" :key="elem.id"
         class="list-group-item d-flex align-items-center justify-content-between">
 

@@ -178,7 +178,7 @@ export default {
 			<div class="row justify-content-center">
 
 				<TransitionGroup name="list" tag="ol"
-					class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
+					class="list-group list-group-numbered col-11 col-md-10 col-lg-8 mb-4 px-0">
 					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id"
 						class="list-group-item d-flex px-1 px-sm-2">
 
@@ -210,7 +210,7 @@ export default {
 							</div>
 
 							<div v-if="elem.edit" class="row g-1 justify-content-center">
-								<div class="input-group mb-1 ">
+								<div class="input-group mb-1">
 									<div class="col-12 mb-2">
 										<label for="inputLink" class="row g-1">
 											<div class="col-3 col-sm-2 col-md-2">
@@ -261,7 +261,7 @@ export default {
 					:num="6" :tagName="'P'" />
 				<div class="row g-1 justify-content-center">
 					<div class="input-group mb-0 justify-content-center">
-						<div class="col-12 col-sm-10 mb-2">
+						<div class="col-11 col-sm-10 mb-2">
 							<label for="inputLink" class="row g-1">
 								<div class="col-3 col-sm-2 col-md-1">
 									<span class="input-group-text" id="basic-addon1">Link</span>
@@ -273,7 +273,7 @@ export default {
 								</div>
 							</label>
 						</div>
-						<div class="col-12 col-sm-10 mb-2">
+						<div class="col-11 col-sm-10 mb-2">
 							<label class="row g-1" for="inputName">
 								<div class="col-3 col-sm-2 col-md-1">
 									<span class="input-group-text" id="basic-addon2">Имя</span>
@@ -285,7 +285,7 @@ export default {
 								</div>
 							</label>
 						</div>
-						<div class="col-12 col-sm-10 mb-2">
+						<div class="col-11 col-sm-10 mb-2">
 							<label class="row g-1" for="inputDescription">
 								<div class="col-3 col-sm-2 col-md-1">
 									<span class="input-group-text" id="basic-addon3">Title</span>
