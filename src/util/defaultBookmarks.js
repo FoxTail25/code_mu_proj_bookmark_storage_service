@@ -48,7 +48,7 @@ export const defaultBookmarksArr = [
 			},
 			{
 				id: '-FzflpDLCVh5aHXsnqKA2',
-				linkOrder: 1,
+				linkOrder: 2,
 				name: 'Bootstrap 5.3',
 				link: 'https://getbootstrap.com/docs/5.3/getting-started/introduction/',
 				description: 'Bootstrap 5.3 introduction',
@@ -56,7 +56,7 @@ export const defaultBookmarksArr = [
 			},
 			{
 				id: '-FzflpDLCVh5aHXsnqKA3',
-				linkOrder: 1,
+				linkOrder: 3,
 				name: 'Bootstrap 5.3 перевод на русский',
 				link: 'https://getbootstrap.su/docs/5.3/getting-started/introduction/',
 				description: 'Bootstrap 5.3 перевод на русский',
