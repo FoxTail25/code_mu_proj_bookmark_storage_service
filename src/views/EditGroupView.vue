@@ -59,6 +59,7 @@ export default {
     deleteGroup() {
       if (this.selectedToDelete != 'Выберите имя группы') {
         store.deleteBookmarkGroup(this.selectedToDelete);
+        this.selectedToDelete = 'Выберите имя группы';
       } else {
         this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
         this.$refs.dg_modal.click();
@@ -176,7 +177,9 @@ export default {
 .f1 {
   flex: 1;
 }
-.list-move, /* применять переход к движущимся элементам */
+
+.list-move,
+/* применять переход к движущимся элементам */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;

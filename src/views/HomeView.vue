@@ -17,8 +17,8 @@ export default {
   },
   computed: {
     getOrder() {
-      let sortedBookmarks = this.bookmarks.sort((a, b) => a.section_order - b.section_order);
-      return sortedBookmarks
+      this.bookmarks = [...store.bookmarkArr]
+      return this.bookmarks
     },
     search() {
       let arr = this.bookmarks.reduce((acc, obj) => {
@@ -54,9 +54,6 @@ export default {
       }
       return newStr
     },
-  },
-  mounted() {
-    this.bookmarks = [...store.bookmarkArr];
   },
   created() {
     store = useBookmarkStore();

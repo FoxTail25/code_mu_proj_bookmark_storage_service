@@ -37,21 +37,21 @@ store.setFirstData();
     <ul class="nav nav-tabs justify-content-center mb-4">
 
       <li class="nav-item">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active bg-warning"
-          aria-current="true" aria-label="Slide 1">1</button>
+        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="0" class="nav-link active "
+          aria-current="true" aria-label="Slide 1">Мои закладки</button>
       </li>
       <li class="nav-item">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
-          class="bg-warning">2</button>
+        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="1" aria-label="Slide 2"
+          class="nav-link">Редактирование групп</button>
       </li>
       <li class="nav-item">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
-          class="bg-warning">3</button>
+        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="2" aria-label="Slide 3"
+          class="nav-link">Редактирование записей</button>
       </li>
     </ul>
 
 
-    <div id="carouselExampleIndicators" class="carousel slide mb-4">
+    <div id="caruselChange" class="carousel slide mb-4">
 
       <div class="carousel-inner">
         <div class="carousel-item transit active">
