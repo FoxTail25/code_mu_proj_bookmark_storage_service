@@ -160,7 +160,7 @@ export default {
 	<PageHeader :msg="'Редактирование записей в группе'" />
 	<PageHeader :msg="'(Из выпадающего списка выберите группу для редактирования)'" :num="6" :tagName="'P'" />
 
-	<div class="row justify-content-center mb-4">
+	<div class="row justify-content-center">
 
 		<div class="mt-2">
 			<div class="row justify-content-center">
@@ -315,7 +315,7 @@ export default {
 								<option>Выберите имя записи</option>
 								<option v-for="elem in getSelectedGroupRecord" :value="elem.id" :key="elem.id">{{
 									elem.name
-									}}</option>
+								}}</option>
 							</select>
 						</div>
 						<button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2"
