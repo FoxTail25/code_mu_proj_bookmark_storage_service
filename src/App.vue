@@ -34,33 +34,33 @@ store.setFirstData();
     <RouterView />
      -->
 
-      <ul class="nav nav-tabs justify-content-center mb-4">
+    <ul class="nav nav-tabs justify-content-center mb-4">
 
-        <li class="nav-item">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-            class="active bg-warning" aria-current="true" aria-label="Slide 1">1</button>
-        </li>
-        <li class="nav-item">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
-            class="bg-warning">2</button>
-        </li>
-        <li class="nav-item">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
-            class="bg-warning">3</button>
-        </li>
-      </ul>
+      <li class="nav-item">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active bg-warning"
+          aria-current="true" aria-label="Slide 1">1</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
+          class="bg-warning">2</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
+          class="bg-warning">3</button>
+      </li>
+    </ul>
 
 
-    <div id="carouselExampleIndicators" class="carousel slide transit">
+    <div id="carouselExampleIndicators" class="carousel slide mb-4">
 
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item transit active">
           <HomeView />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item transit">
           <EditGroupView />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item transit">
           <EditRecordView />
         </div>
       </div>
@@ -110,10 +110,10 @@ store.setFirstData();
 </template>
 
 <style scoped>
-.trnsit {
-  transition: 0.2s;
-  transition-duration: 0.2s;
+.transit {
+  transition: transform .2s ease
 }
+
 footer {
   height: 30px;
   position: fixed;
