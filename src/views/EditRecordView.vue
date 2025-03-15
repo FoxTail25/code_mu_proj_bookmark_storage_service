@@ -100,7 +100,15 @@ export default {
 			link.edit = false;
 		},
 		deleteLinkFromGroup() {
-			store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete);
+			if (this.selectedToDelete != 'Выберите имя записи') {
+				store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete);
+				this.selectedToDelete = 'Выберите имя записи';
+			} else {
+				console.log('не выбрана запись') // надо прикрутить модалку вместо этого
+				this.$refs.modalText.innerHTML = 'Не выбрана запись для удаления';
+				this.warningModalCloseLink = 'deleteLink'
+				this.$refs.modal.click();
+			}
 		},
 
 		_checkText(str) {
@@ -115,6 +123,7 @@ export default {
 				case 'link': this.$refs.link.focus(); break
 				case 'name': this.$refs.name.focus(); break
 				case 'description': this.$refs.description.focus(); break
+				case 'deleteLink': this.$refs.deleteLink.focus(); break
 			}
 		}
 	},
@@ -168,7 +177,8 @@ export default {
 		<div v-if="group_selected" class="mt-2">
 			<div class="row justify-content-center">
 
-				<TransitionGroup name="list" tag="ol" class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
+				<TransitionGroup name="list" tag="ol"
+					class="list-group list-group-numbered col-12 col-md-10 col-lg-8 mb-4 px-0 px-sm-2">
 					<li v-for="(elem) in getSelectedGroupRecord" :key="elem.id"
 						class="list-group-item d-flex px-1 px-sm-2">
 
@@ -300,11 +310,12 @@ export default {
 				<div class="mt-2">
 					<div class="row justify-content-center">
 						<div class="col-10 mb-2">
-							<select class="form-select" aria-label="Default select" v-model="selectedToDelete">
+							<select class="form-select" aria-label="Default select" v-model="selectedToDelete"
+								ref="deleteLink">
 								<option>Выберите имя записи</option>
 								<option v-for="elem in getSelectedGroupRecord" :value="elem.id" :key="elem.id">{{
 									elem.name
-								}}</option>
+									}}</option>
 							</select>
 						</div>
 						<button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2"
@@ -347,21 +358,23 @@ export default {
 .f1 {
 	flex: 1;
 }
-.list-move, /* применять переход к движущимся элементам */
+
+.list-move,
+/* применять переход к движущимся элементам */
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
+	opacity: 0;
+	transform: translateX(30px);
 }
 
 /* убедитесь, что удаляющиеся элементы выведены из потока, чтобы
 анимации перемещения могли быть рассчитаны правильно. */
 .list-leave-active {
-  position: static;
+	position: static;
 }
 </style>
