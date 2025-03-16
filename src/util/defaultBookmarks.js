@@ -22,6 +22,14 @@ export const defaultBookmarksArr = [
 				description: 'не плохой сайт по изучению программирования',
 				edit: false,
 			},
+			{
+				id: 'd71hx7QbBONXWeDqMg9a3',
+				linkOrder: 2,
+				name: 'METANIT.COM',
+				link: 'https://metanit.com/',
+				description: 'Метанит - ещё один полезный ресур по изучению программирования',
+				edit: false,
+			},
 		]
 	},
 	{
