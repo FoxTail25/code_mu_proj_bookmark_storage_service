@@ -128,7 +128,7 @@ export default {
       </div>
     </div>
     <div class="row d-flex justify-content-center">
-      <button class="btn btn-success col-10 col-sm-4" @click="downLoadBookmarksData">Сохранить данные в js файле</button>
+      <button class="btn btn-success col-10 col-sm-8 col-md-5 col-lg-4" @click="downLoadBookmarksData">Сохранить данные в js файле</button>
     </div>
   </main>
 </template>
