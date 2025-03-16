@@ -125,7 +125,11 @@ export default {
 				case 'description': this.$refs.description.focus(); break
 				case 'deleteLink': this.$refs.deleteLink.focus(); break
 			}
-		}
+		},
+    selectedInput(){
+      this.selectedToEdit = 'Выберите имя группы';
+      console.log('select input'); this.$refs.groupSelect.blur()
+    }
 	},
 	computed: {
 		sorted() {
@@ -165,7 +169,10 @@ export default {
 		<div class="mt-2">
 			<div class="row justify-content-center">
 				<div class="col-10 mb-2">
-					<select class="form-select" aria-label="Default select example" v-model="selectedToEdit">
+					<select class="form-select" aria-label="Default select example" v-model="selectedToEdit"
+          @focus="selectedInput"
+          ref="groupSelect"
+          >
 						<option>Выберите имя группы</option>
 						<option v-for="elem in bookmarkArr" :value="elem.id" :key="elem.id">{{ elem.section_name }}
 						</option>
