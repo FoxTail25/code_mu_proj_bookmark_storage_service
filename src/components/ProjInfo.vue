@@ -54,7 +54,7 @@
         <div class="mainpresc fst-italic">
             <h6>Реализация проекта</h6>
             <p>
-                Проект реализован с помощью фреймворков Vue3 (Vue-Router, Pinia) и Bootstrap 5.3
+                Проект реализован с помощью фреймворков Vue3 (State manager: Pinia) и Bootstrap 5.3
             </p>
         </div>
     </div>
