@@ -55,7 +55,7 @@ export default {
       return newStr
     },
     downLoadBookmarksData(){
-     const data =  localStorage.getItem('bookmarksService');
+    const data =  localStorage.getItem('bookmarksService');
     const blob = new Blob([`const youBookmrks = ${data}`], { type: 'text/JavaScript' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -63,6 +63,7 @@ export default {
     a.download = 'myBookmarks.js';
     document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
     }
   },
   created() {
