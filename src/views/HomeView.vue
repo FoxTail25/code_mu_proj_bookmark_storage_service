@@ -54,16 +54,16 @@ export default {
       }
       return newStr
     },
-    downLoadBookmarksData(){
-    const data =  localStorage.getItem('bookmarksService');
-    const blob = new Blob([`const youBookmrks = ${data}`], { type: 'text/JavaScript' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'myBookmarks.js';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    downLoadBookmarksData() {
+      const data = localStorage.getItem('bookmarksService');
+      const blob = new Blob([`const youBookmrks = ${data}`], { type: 'text/JavaScript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'myBookmarks.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   },
   created() {
@@ -110,8 +110,8 @@ export default {
 
       </div>
     </div>
-    <div class="row g-2 mb-4">
-      <div v-for="elem in getOrder" :key="elem.id" class="col-12 col-md-6">
+    <div class="row g-2 mb-4 justify-content-center">
+      <div v-for="elem in getOrder" :key="elem.id" class="col-12 col-md-6 col-lg-4">
         <div class="card">
 
           <div class="card-body">
@@ -129,7 +129,8 @@ export default {
       </div>
     </div>
     <div class="row d-flex justify-content-center">
-      <button class="btn btn-success col-10 col-sm-8 col-md-5 col-lg-4" @click="downLoadBookmarksData">Сохранить данные в js файле</button>
+      <button class="btn btn-success col-10 col-sm-8 col-md-5 col-lg-4" @click="downLoadBookmarksData">Сохранить данные
+        в js файле</button>
     </div>
   </main>
 </template>
