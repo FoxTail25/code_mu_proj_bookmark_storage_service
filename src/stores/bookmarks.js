@@ -10,6 +10,7 @@ import { localStorageWork } from '@/util/local_stor';
 export const useBookmarkStore = defineStore('bookmarks', () => {
   const bookmarkArr = ref([]);
   const name = ref('none');
+  const deletedBookmarksArr = ref([]);
 
 
   function setFirstData() {
@@ -76,10 +77,27 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
         index = i;
       }
     })
-    bookmarkArr.value.splice(index, 1);
-    bookmarkArr.value.forEach((e, i)=> e.section_order = i);
+    let deletedGroupItem = bookmarkArr.value.splice(index, 1)[0];
+    deletedBookmarksArr.value.push({ ...deletedGroupItem });
+    bookmarkArr.value.forEach((e, i) => e.section_order = i);
     localStorageWork.setRecord([...bookmarkArr.value]);
   };
+  function permanentRemovalGroup(id) {
+    let indexDelItem;
+    deletedBookmarksArr.value.forEach((e, i) => {
+      if (e.id == id) {
+        indexDelItem = i
+      }
+    })
+    deletedBookmarksArr.value.splice(indexDelItem, 1)
+  };
+  function restoreDeletedGroup(group, id) {
+    this.permanentRemovalGroup(id);
+    console.log(group)
+    group.section_order = bookmarkArr.value.length;
+    bookmarkArr.value.push(group)
+    console.log(group)
+  }
 
 
   function changeRecordOrder(groupId, recordId, direct) {
@@ -142,7 +160,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
       }
     })
     bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
-    bookmarkArr.value[groupIndex].bookmarksList.forEach((elem,ind)=> elem.linkOrder = ind)
+    bookmarkArr.value[groupIndex].bookmarksList.forEach((elem, ind) => elem.linkOrder = ind)
     localStorageWork.setRecord([...bookmarkArr.value]);
   }
 
@@ -158,5 +176,9 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     addNewLinkRecord,
     deleteLinkFromGroup,
     changeRecordData,
+
+    deletedBookmarksArr,
+    permanentRemovalGroup,
+    restoreDeletedGroup
   };
 })

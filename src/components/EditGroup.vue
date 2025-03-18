@@ -7,6 +7,7 @@ import Trash from '@/components/icon/Trash.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
 import EditRecordView from './EditRecord.vue';
+import Undo from './icon/Undo.vue';
 
 </script>
 <script>
@@ -18,7 +19,8 @@ export default {
       bookmarkArr: [],
       nameText: '',
       newGroupName: '',
-      // selectedToDelete: 'Выберите имя группы',
+      deletedItem: [],
+      isDeleted: false,
     }
   },
   methods: {
@@ -59,14 +61,17 @@ export default {
       this.newGroupName = '';
     },
     deleteGroup(id) {
-      console.log(id)
-      // if (this.selectedToDelete != 'Выберите имя группы') {
+      // console.log(id)
       store.deleteBookmarkGroup(id);
-      //   this.selectedToDelete = 'Выберите имя группы';
-      // } else {
-      //   this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
-      //   this.$refs.dg_modal.click();
-      // }
+    },
+    restoreGroup(id) {
+      console.log('restore group id:', id);
+      let daletedGroup = this.deletedItem.filter(e => e.id == id)[0];
+
+      store.restoreDeletedGroup(daletedGroup, id);
+    },
+    permanentRemoval(id) {
+      store.permanentRemovalGroup(id)
     },
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
@@ -76,13 +81,24 @@ export default {
     sorted() {
       this.bookmarkArr.sort((a, b) => a.section_order - b.section_order);
       return this.bookmarkArr
-    }
+    },
+    reNewDeletedGroupArr() {
+      this.deletedItem = store.deletedBookmarksArr;
+
+      if (this.deletedItem.length != 0) {
+        this.isDeleted = true
+      } else {
+        this.isDeleted = false
+      }
+      return this.deletedItem;
+    },
   },
 
   created() {
     store = useBookmarkStore();
     this.bookmarkArr = store.bookmarkArr;
-  }
+  },
+
 }
 </script>
 
@@ -95,10 +111,10 @@ export default {
     <TransitionGroup name="list" tag="ol"
       class="list-group list-group-numbered col-11 col-md-10 col-md-10 col-lg-8 px-0">
       <li v-for="(elem) in sorted" :key="elem.id"
-        class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2">
+        class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2 py-1">
 
         <span>
-          <button class="btn btn-primary p-1 m-0 ms-1 m-sm-1 lh-1" @click="changeOrder(elem.id, 'up')"
+          <button class="btn btn-primary p-1 m-0 ms-1 lh-1" @click="changeOrder(elem.id, 'up')"
             :disabled="checkUp(elem.section_order)" title="Переместить группу вверх">
             <IcinArrowUp />
           </button>
@@ -127,6 +143,35 @@ export default {
         </button>
       </li>
     </TransitionGroup>
+
+    <div v-if="isDeleted" class="row justify-content-center mt-4">
+      <PageHeader :msg="'удалённые записи'" :num="5" :tagName="'P'" class="mb-0" />
+      <p class="text-center">(записи будут автоматически удалены после обновления страницы)</p>
+
+    </div>
+    <div class="row justify-content-center">
+      <TransitionGroup name="listDel" tag="ul" class="list-group col-12 col-md-10 col-md-10 col-lg-8 px-0">
+        <li v-for="(elem) in reNewDeletedGroupArr" :key="elem.id"
+          class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2 py-1">
+
+          <span>
+            <button class="btn btn-success p-1 m-0 ms-1 lh-1" @click="restoreGroup(elem.id)"
+              title="восстановить группу">
+              <Undo />
+            </button>
+
+          </span>
+
+          <span class="f1 text-center text-decoration-line-through">
+            {{ elem.section_name }}
+          </span>
+
+          <button class="btn btn-danger p-1 m-1 lh-1" title="удаление насовсем" @click="permanentRemoval(elem.id)">
+            <Trash />
+          </button>
+        </li>
+      </TransitionGroup>
+    </div>
   </div>
   <!-- Добавление новой группы -->
   <PageHeader :msg="'Добавление новой группы'" />
@@ -139,43 +184,7 @@ export default {
       <button class="btn btn-success col-10 col-sm-6 col-md-4" @click="addNewGroup">Добавить новую группу</button>
     </div>
   </div>
-  <!-- Удаление группы -->
-  <!-- <PageHeader :msg="'Удаление группы'" /> -->
-  <!-- <PageHeader :msg="'(выберите группу	из выпадающего списка и нажмите &laquo;Удалить группу&raquo;)'" :num="6" :tagName="'P'" /> -->
-  <!-- <div class="mt-2">
-    <div class="row justify-content-center">
-      <div class="col-10 mb-2">
-        <select class="form-select" aria-label="Default select" v-model="selectedToDelete">
-          <option>Выберите имя группы</option>
-          <option v-for="elem in sorted" :value="elem.id" :key="elem.id">{{ elem.section_name }}</option>
-        </select>
-      </div>
-      <button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2" @click="deleteGroup">Удалить группу</button>
-    </div>
-  </div> -->
-  <!-- Модальное окно -->
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningDgModal"
-    ref="dg_modal">
-    Launch demo modal
-  </button> -->
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="warningDgModal" tabindex="-1" aria-labelledby="warningDgModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="warningDgModalLabel">Не все поля заполнены</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" ref="dg_modalText">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+
 
 
 </template>
