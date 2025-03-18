@@ -95,14 +95,14 @@ export default {
     <TransitionGroup name="list" tag="ol"
       class="list-group list-group-numbered col-11 col-md-10 col-md-10 col-lg-8 px-0">
       <li v-for="(elem) in sorted" :key="elem.id"
-        class="list-group-item d-flex align-items-center justify-content-between">
+        class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2">
 
         <span>
-          <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
+          <button class="btn btn-primary p-1 m-0 ms-1 m-sm-1 lh-1" @click="changeOrder(elem.id, 'up')"
             :disabled="checkUp(elem.section_order)" title="Переместить группу вверх">
             <IcinArrowUp />
           </button>
-          <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'down')"
+          <button class="btn btn-primary p-1 m-0 m-sm-1 lh-1" @click="changeOrder(elem.id, 'down')"
             :disabled="checkDown(elem.section_order)" title="Переместить группу вниз">
             <IcinArrowDown />
           </button>
@@ -114,11 +114,11 @@ export default {
         <input v-else type="text" class="form-control f1" v-model="nameText">
 
 
-        <button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
+        <button v-if="!elem.edit" class="btn btn-primary p-1 mx-0 lh-1"
           @click="editGroupName(elem.id, elem.section_name)" title="Изменить название группы">
           <EditText />
         </button>
-        <button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
+        <button v-else class="btn btn-primary p-1 mx-0 lh-1" @click="saveGroupName(elem.id)"
           title="Сохранить название группы">
           <SaveText />
         </button>
