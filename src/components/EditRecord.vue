@@ -5,6 +5,8 @@ import IconArrowDown from '@/components/icon/IconArrowDown.vue';
 import IconArrowUp from '@/components/icon/IconArrowUp.vue';
 import EditText from '@/components/icon/EditText.vue';
 import SaveText from '@/components/icon/SaveText.vue';
+import Trash from './icon/Trash.vue';
+import Undo from './icon/Undo.vue';
 </script>
 
 <script>
@@ -26,6 +28,9 @@ export default {
 				description: '',
 			},
 			warningModalCloseLink: '',
+			deletedLinkArr: [],
+			isDeleted: false,
+
 		}
 	},
 	methods: {
@@ -99,16 +104,27 @@ export default {
 			store.changeRecordData(this.selectedToEdit, linkId, { ...this.editOldLinkRecord });
 			link.edit = false;
 		},
-		deleteLinkFromGroup() {
-			if (this.selectedToDelete != 'Выберите имя записи') {
-				store.deleteLinkFromGroup(this.selectedToEdit, this.selectedToDelete);
-				this.selectedToDelete = 'Выберите имя записи';
-			} else {
-				console.log('не выбрана запись') // надо прикрутить модалку вместо этого
-				this.$refs.modalText.innerHTML = 'Не выбрана запись для удаления';
-				this.warningModalCloseLink = 'deleteLink'
-				this.$refs.modal.click();
-			}
+		delLinkFromGroup(id) {
+			let groupId = this.selectedToEdit;
+			console.log('recordId', id);
+
+			console.log('groupId', groupId);
+
+			console.log(this.bookmarkArr)
+
+			store.deleteLinkFromGroup(groupId, id);
+
+			// if (this.selectedToDelete != 'Выберите имя записи') {
+			// 	this.selectedToDelete = 'Выберите имя записи';
+			// } else {
+			// 	console.log('не выбрана запись') // надо прикрутить модалку вместо этого
+			// 	this.$refs.modalText.innerHTML = 'Не выбрана запись для удаления';
+			// 	this.warningModalCloseLink = 'deleteLink'
+			// 	this.$refs.modal.click();
+			// }
+		},
+		restoreLink(id) {
+
 		},
 
 		_checkText(str) {
@@ -126,10 +142,20 @@ export default {
 				case 'deleteLink': this.$refs.deleteLink.focus(); break
 			}
 		},
-    selectedInput(){
-      this.selectedToEdit = 'Выберите имя группы';
-      console.log('select input'); this.$refs.groupSelect.blur()
-    }
+		// selectedInput() {
+		// 	this.selectedToEdit = 'Выберите имя группы';
+		// 	console.log('select input');
+		// 	this.$refs.groupSelect.blur()
+		// },
+		restoreLink(id) {
+			let groupId = this.selectedToEdit;
+			console.log('restoreLinkId', id)
+			console.log('selectedGroupId', groupId)
+		},
+		permanentDeleteLink(id) {
+			// console.log(id)
+			store.permanentRemovalLink(id)
+		}
 	},
 	computed: {
 		sorted() {
@@ -151,6 +177,16 @@ export default {
 				return selectedGroup.bookmarksList
 			}
 		},
+		reNewDeletedLinkArr() {
+			this.deletedLinkArr = store.deletedLinkArr;
+
+			if (this.deletedLinkArr.length != 0) {
+				this.isDeleted = true
+			} else {
+				this.isDeleted = false
+			}
+			return this.deletedLinkArr;
+		},
 	},
 	created() {
 		store = useBookmarkStore();
@@ -170,9 +206,7 @@ export default {
 			<div class="row justify-content-center">
 				<div class="col-10 mb-2">
 					<select class="form-select" aria-label="Default select example" v-model="selectedToEdit"
-          @focus="selectedInput"
-          ref="groupSelect"
-          >
+						ref="groupSelect">
 						<option>Выберите имя группы</option>
 						<option v-for="elem in bookmarkArr" :value="elem.id" :key="elem.id">{{ elem.section_name }}
 						</option>
@@ -206,13 +240,17 @@ export default {
 									{{ elem.name }}
 								</span>
 
-								<button v-if="!elem.edit" class="btn btn-primary p-1 m-1 lh-1"
+								<button v-if="!elem.edit" class="btn btn-primary p-1 mx-0 mx-md-1 lh-1"
 									@click="editLinkRecordFromGroup(elem.id)" title="Отредактировать запись">
 									<EditText />
 								</button>
-								<button v-else class="btn btn-primary p-1 m-1 lh-1"
+								<button v-else class="btn btn-primary p-1 mx-0 lh-1"
 									@click="saveLinkRecordFromGroup(elem.id)" title="сохранить запись">
 									<SaveText />
+								</button>
+								<button class="btn btn-danger p-1 m-1 lh-1" @click="delLinkFromGroup(elem.id)"
+									title="удалить запись из группы">
+									<Trash />
 								</button>
 							</div>
 
@@ -263,6 +301,37 @@ export default {
 					</li>
 				</TransitionGroup>
 
+				<div v-if="isDeleted" class="row justify-content-center mt-4">
+					<PageHeader :msg="'удалённые записи'" :num="5" :tagName="'P'" class="mb-0" />
+					<p class="text-center">(записи будут автоматически удалены после обновления страницы)</p>
+
+				</div>
+				<div class="row justify-content-center">
+					<TransitionGroup name="listDel" tag="ul"
+						class="list-group col-12 col-md-10 col-md-10 col-lg-8 px-0">
+						<li v-for="(elem) in reNewDeletedLinkArr" :key="elem.id"
+							class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2 py-1">
+
+							<span>
+								<button class="btn btn-success p-1 m-0 ms-1 lh-1" @click="restoreLink(elem.id)"
+									title="восстановить группу">
+									<Undo />
+								</button>
+
+							</span>
+
+							<span class="f1 text-center text-decoration-line-through">
+								{{ elem.name }}
+							</span>
+
+							<button class="btn btn-danger p-1 m-1 lh-1" title="удаление насовсем"
+								@click="permanentDeleteLink(elem.id)">
+								<Trash />
+							</button>
+						</li>
+					</TransitionGroup>
+				</div>
+
 				<PageHeader :msg="'Добавить новую запись в группу'" />
 				<PageHeader :msg="'(Заполните обязательные поля и нажмите &laquo;Добавить запись в группу&raquo;)'"
 					:num="6" :tagName="'P'" />
@@ -311,10 +380,10 @@ export default {
 					</div>
 				</div>
 
-				<PageHeader :msg="'Удаление записи из группы'" />
+				<!-- <PageHeader :msg="'Удаление записи из группы'" />
 				<PageHeader :msg="'(выберите запись	из выпадающего списка и нажмите &laquo;Удалить запись&raquo;)'"
-					:num="6" :tagName="'P'" />
-				<div class="mt-2">
+					:num="6" :tagName="'P'" /> -->
+				<!-- <div class="mt-2">
 					<div class="row justify-content-center">
 						<div class="col-10 mb-2">
 							<select class="form-select" aria-label="Default select" v-model="selectedToDelete"
@@ -329,7 +398,7 @@ export default {
 							@click="deleteLinkFromGroup">Удалить
 							запись</button>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -344,6 +413,7 @@ export default {
 	<!-- Modal -->
 	<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true"
 		@click="warningModalClose">
+
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">

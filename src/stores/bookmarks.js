@@ -11,6 +11,7 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   const bookmarkArr = ref([]);
   const name = ref('none');
   const deletedBookmarksArr = ref([]);
+  const deletedLinkArr = ref([]);
 
 
   function setFirstData() {
@@ -93,10 +94,8 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
   };
   function restoreDeletedGroup(group, id) {
     this.permanentRemovalGroup(id);
-    console.log(group)
     group.section_order = bookmarkArr.value.length;
     bookmarkArr.value.push(group)
-    console.log(group)
   }
 
 
@@ -145,8 +144,10 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
     };
     bookmarkArr.value.filter(e => e.id == groupId)[0].bookmarksList.push(newLinkRecord);
     localStorageWork.setRecord([...bookmarkArr.value]);
-  }
+  };
   function deleteLinkFromGroup(groupId, linkId) {
+    // console.log('group', groupId);
+    // console.log('link', linkId);
     let groupIndex;
     let linkIndex;
     bookmarkArr.value.forEach((e, i) => {
@@ -159,9 +160,25 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
         linkIndex = i;
       }
     })
-    bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1);
-    bookmarkArr.value[groupIndex].bookmarksList.forEach((elem, ind) => elem.linkOrder = ind)
+
+    let deletedLink = bookmarkArr.value[groupIndex].bookmarksList.splice(linkIndex, 1)[0];
+    deletedLinkArr.value.push(deletedLink);
+    bookmarkArr.value[groupIndex].bookmarksList.forEach((elem, ind) => elem.linkOrder = ind);
     localStorageWork.setRecord([...bookmarkArr.value]);
+  };
+  function permanentRemovalLink(linkId) {
+    console.log(linkId)
+    let indexDelItem;
+    deletedLinkArr.value.forEach((e, i) => {
+      if (e.id == linkId) {
+        indexDelItem = i
+      }
+    })
+    deletedLinkArr.value.splice(indexDelItem, 1);
+    console.log(deletedLinkArr.value)
+  }
+  function restoreDeletedLinkInSelectedGroup(groupId, linkId) {
+
   }
 
   return {
@@ -179,6 +196,8 @@ export const useBookmarkStore = defineStore('bookmarks', () => {
 
     deletedBookmarksArr,
     permanentRemovalGroup,
-    restoreDeletedGroup
+    restoreDeletedGroup,
+    deletedLinkArr,
+    permanentRemovalLink,
   };
 })

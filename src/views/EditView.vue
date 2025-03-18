@@ -6,6 +6,6 @@ import EditRecordView from '../components/EditRecord.vue';
 
 <template>
 	<EditGroupView />
-	<hr class="mb-4 pb-4" />
+	<hr class="mb-4 mt-0 pb-4" />
 	<EditRecordView />
 </template>

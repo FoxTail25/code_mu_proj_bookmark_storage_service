@@ -130,7 +130,7 @@ export default {
         <input v-else type="text" class="form-control f1" v-model="nameText">
 
 
-        <button v-if="!elem.edit" class="btn btn-primary p-1 mx-0 lh-1"
+        <button v-if="!elem.edit" class="btn btn-primary p-1 mx-0 mx-md-1 lh-1"
           @click="editGroupName(elem.id, elem.section_name)" title="Изменить название группы">
           <EditText />
         </button>
@@ -176,7 +176,7 @@ export default {
   <!-- Добавление новой группы -->
   <PageHeader :msg="'Добавление новой группы'" />
   <PageHeader :msg="'(напишите имя и нажмите 	&laquo;Добавить новую группу&raquo;)'" :num="6" :tagName="'P'" />
-  <div class="mt-2 mb-4">
+  <div class="mt-2 mb-2">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
         <input type="text" class="form-control" v-model="newGroupName">
