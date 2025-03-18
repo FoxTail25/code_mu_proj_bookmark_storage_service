@@ -3,8 +3,10 @@ import EditText from '@/components/icon/EditText.vue';
 import IcinArrowDown from '@/components/icon/IconArrowDown.vue';
 import IcinArrowUp from '@/components/icon/IconArrowUp.vue';
 import SaveText from '@/components/icon/SaveText.vue';
+import Trash from '@/components/icon/Trash.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
+import EditRecordView from './EditRecord.vue';
 
 </script>
 <script>
@@ -16,7 +18,7 @@ export default {
       bookmarkArr: [],
       nameText: '',
       newGroupName: '',
-      selectedToDelete: 'Выберите имя группы',
+      // selectedToDelete: 'Выберите имя группы',
     }
   },
   methods: {
@@ -56,14 +58,15 @@ export default {
       store.addNewGroup(newName);
       this.newGroupName = '';
     },
-    deleteGroup() {
-      if (this.selectedToDelete != 'Выберите имя группы') {
-        store.deleteBookmarkGroup(this.selectedToDelete);
-        this.selectedToDelete = 'Выберите имя группы';
-      } else {
-        this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
-        this.$refs.dg_modal.click();
-      }
+    deleteGroup(id) {
+      console.log(id)
+      // if (this.selectedToDelete != 'Выберите имя группы') {
+      store.deleteBookmarkGroup(id);
+      //   this.selectedToDelete = 'Выберите имя группы';
+      // } else {
+      //   this.$refs.dg_modalText.innerHTML = 'Не выбрана группа для удаления';
+      //   this.$refs.dg_modal.click();
+      // }
     },
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
@@ -116,8 +119,11 @@ export default {
           <EditText />
         </button>
         <button v-else class="btn btn-primary p-1 m-1 lh-1" @click="saveGroupName(elem.id)"
-          title="сохранить название группы">
+          title="Сохранить название группы">
           <SaveText />
+        </button>
+        <button class="btn btn-danger p-1 m-1 lh-1" title="удаление группы" @click="deleteGroup(elem.id)">
+          <Trash />
         </button>
       </li>
     </TransitionGroup>
@@ -134,10 +140,9 @@ export default {
     </div>
   </div>
   <!-- Удаление группы -->
-  <PageHeader :msg="'Удаление группы'" />
-  <PageHeader :msg="'(выберите группу	из выпадающего списка и нажмите &laquo;Удалить группу&raquo;)'" :num="6"
-    :tagName="'P'" />
-  <div class="mt-2">
+  <!-- <PageHeader :msg="'Удаление группы'" /> -->
+  <!-- <PageHeader :msg="'(выберите группу	из выпадающего списка и нажмите &laquo;Удалить группу&raquo;)'" :num="6" :tagName="'P'" /> -->
+  <!-- <div class="mt-2">
     <div class="row justify-content-center">
       <div class="col-10 mb-2">
         <select class="form-select" aria-label="Default select" v-model="selectedToDelete">
@@ -147,15 +152,15 @@ export default {
       </div>
       <button class="btn btn-danger col-10 col-sm-6 col-md-4 mb-2" @click="deleteGroup">Удалить группу</button>
     </div>
-  </div>
+  </div> -->
   <!-- Модальное окно -->
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningDgModal"
+  <!-- <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#warningDgModal"
     ref="dg_modal">
     Launch demo modal
-  </button>
+  </button> -->
   <!-- Modal -->
-  <div class="modal fade" id="warningDgModal" tabindex="-1" aria-labelledby="warningDgModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="warningDgModal" tabindex="-1" aria-labelledby="warningDgModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -170,7 +175,8 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
 
 </template>
 

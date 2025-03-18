@@ -30,8 +30,8 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
-import EditGroupView from '@/views/EditGroupView.vue'
-import EditRecordView from '@/views/EditRecordView.vue'
+import EditGroupView from '@/components/EditGroup.vue'
+import EditRecordView from '@/components/EditRecord.vue'
 
 
 const routes = [

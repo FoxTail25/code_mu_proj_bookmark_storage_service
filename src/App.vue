@@ -4,8 +4,9 @@ import PageHeader from './components/PageHeader.vue';
 import ProjInfo from './components/ProjInfo.vue';
 import Question from './components/icon/Question.vue';
 import HomeView from './views/HomeView.vue';
-import EditGroupView from './views/EditGroupView.vue';
-import EditRecordView from './views/EditRecordView.vue';
+import EditGroupView from './components/EditGroup.vue';
+import EditRecordView from './components/EditRecord.vue';
+import EditView from './views/EditView.vue';
 
 const store = useBookmarkStore();
 store.setFirstData();
@@ -48,12 +49,9 @@ export default {
       </li>
       <li class="nav-item">
         <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="1" aria-label="Slide 2" class="nav-link"
-          @click="changeActivTab('editGroup')" ref="editGroup">Редактирование групп</button>
+          @click="changeActivTab('editGroup')" ref="editGroup">Редактирование записей</button>
       </li>
-      <li class="nav-item">
-        <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="2" aria-label="Slide 3" class="nav-link"
-          @click="changeActivTab('editLink')" ref="editLink">Редактирование записей</button>
-      </li>
+    
     </ul>
 
     <div id="caruselChange" class="carousel slide mb-4">
@@ -63,11 +61,9 @@ export default {
           <HomeView />
         </div>
         <div class="carousel-item transit">
-          <EditGroupView />
+          <EditView />
         </div>
-        <div class="carousel-item transit">
-          <EditRecordView />
-        </div>
+
       </div>
     </div>
 
