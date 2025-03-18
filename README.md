@@ -18,4 +18,4 @@ JavaScript уровень "персональное задание"
 Данные пользователя хранятся в localStorage.
 
 Стек
-Vue 3 (vue-router, pinia) + Bootstrap 5.3 (первая версия проекта)
+Vue 3 (vue-router, pinia) + Bootstrap 5.3 (первая версия проекта).
