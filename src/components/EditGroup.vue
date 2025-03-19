@@ -6,7 +6,6 @@ import SaveText from '@/components/icon/SaveText.vue';
 import Trash from '@/components/icon/Trash.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
-import EditRecordView from './EditRecord.vue';
 import Undo from './icon/Undo.vue';
 
 </script>
@@ -118,7 +117,7 @@ export default {
             :disabled="checkUp(elem.section_order)" title="Переместить группу вверх">
             <IcinArrowUp />
           </button>
-          <button class="btn btn-primary p-1 m-0 m-sm-1 lh-1" @click="changeOrder(elem.id, 'down')"
+          <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'down')"
             :disabled="checkDown(elem.section_order)" title="Переместить группу вниз">
             <IcinArrowDown />
           </button>

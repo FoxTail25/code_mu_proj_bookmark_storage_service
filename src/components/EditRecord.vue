@@ -200,7 +200,7 @@ export default {
               <div class="col-12 d-flex align-items-center justify-content-between pe-0 ps-sm-3">
 
                 <span>
-                  <button class="btn btn-primary p-1 m-1 lh-1" @click="changeOrder(elem.id, 'up')"
+                  <button class="btn btn-primary p-1 m-0 ms-1 lh-1" @click="changeOrder(elem.id, 'up')"
                     :disabled="checkUp(elem.linkOrder)" title="Переместить группу вверх">
                     <IconArrowUp />
                   </button>
