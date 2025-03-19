@@ -148,25 +148,7 @@ export default {
       <PageHeader :msg="'удалённые записи'" :num="5" :tagName="'P'" class="mb-0" />
       <p class="text-center">(записи будут автоматически удалены после обновления страницы)</p>
     </div>
-    <!-- <div class="row justify-content-center">
-      <TransitionGroup name="listDel" tag="ul" class="list-group col-12 col-md-10 col-md-10 col-lg-8 px-0">
-        <li v-for="(elem) in reNewDeletedGroupArr" :key="elem.id"
-          class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2 py-1">
-          <span>
-            <button class="btn btn-success p-1 m-0 ms-1 lh-1" @click="restoreGroup(elem.id)"
-              title="восстановить группу">
-              <Undo />
-            </button>
-          </span>
-          <span class="f1 text-center text-decoration-line-through">
-            {{ elem.section_name }}
-          </span>
-          <button class="btn btn-danger p-1 m-1 lh-1" title="удаление насовсем" @click="permanentRemoval(elem.id)">
-            <Trash />
-          </button>
-        </li>
-      </TransitionGroup>
-    </div> -->
+    
     <ListDeletedItem :dataList="reNewDeletedGroupArr" :type="'group'" @restore="restoreGroup"
       @permanentDelete="permanentRemoval" />
 

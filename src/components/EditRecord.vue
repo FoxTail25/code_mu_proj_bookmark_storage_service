@@ -284,27 +284,7 @@ export default {
 					<p class="text-center">(Можно удалить записи из группы, затем изменить группу и восстановить записи.
 						Таким образом можно переносить записи из одной группы в другую группу)</p>
 				</div>
-				<!-- <div class="row justify-content-center">
-					<TransitionGroup name="listDel" tag="ul"
-						class="list-group col-12 col-md-10 col-md-10 col-lg-8 px-0">
-						<li v-for="(elem) in reNewDeletedLinkArr" :key="elem.id"
-							class="list-group-item d-flex align-items-center justify-content-between px-0 px-sm-2 py-1">
-							<span>
-								<button class="btn btn-success p-1 m-0 ms-1 lh-1" @click="restoreLink(elem.id)"
-									title="восстановить группу">
-									<Undo />
-								</button>
-							</span>
-							<span class="f1 text-center text-decoration-line-through">
-								{{ elem.name }}
-							</span>
-							<button class="btn btn-danger p-1 m-1 lh-1" title="удаление насовсем"
-								@click="permanentDeleteLink(elem.id)">
-								<Trash />
-							</button>
-						</li>
-					</TransitionGroup>
-				</div> -->
+				
 				<ListDeletedItem :dataList="reNewDeletedLinkArr" :type="'record'" @restore="restoreLink"
 					@permanentDelete="permanentDeleteLink" />
 
