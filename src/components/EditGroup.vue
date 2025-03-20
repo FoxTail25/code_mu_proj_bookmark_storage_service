@@ -6,7 +6,7 @@ import SaveText from '@/components/icon/SaveText.vue';
 import Trash from '@/components/icon/Trash.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
-import Undo from './icon/Undo.vue';
+// import Undo from './icon/Undo.vue';
 import ListDeletedItem from './ListDeletedItem.vue';
 
 </script>
@@ -148,7 +148,7 @@ export default {
       <PageHeader :msg="'удалённые записи'" :num="5" :tagName="'P'" class="mb-0" />
       <p class="text-center">(записи будут автоматически удалены после обновления страницы)</p>
     </div>
-    
+
     <ListDeletedItem :dataList="reNewDeletedGroupArr" :type="'group'" @restore="restoreGroup"
       @permanentDelete="permanentRemoval" />
 

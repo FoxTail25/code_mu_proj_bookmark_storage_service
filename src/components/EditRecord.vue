@@ -6,7 +6,7 @@ import IconArrowUp from '@/components/icon/IconArrowUp.vue';
 import EditText from '@/components/icon/EditText.vue';
 import SaveText from '@/components/icon/SaveText.vue';
 import Trash from './icon/Trash.vue';
-import Undo from './icon/Undo.vue';
+// import Undo from './icon/Undo.vue';
 import ListDeletedItem from './ListDeletedItem.vue';
 </script>
 
@@ -284,7 +284,7 @@ export default {
 					<p class="text-center">(Можно удалить записи из группы, затем изменить группу и восстановить записи.
 						Таким образом можно переносить записи из одной группы в другую группу)</p>
 				</div>
-				
+
 				<ListDeletedItem :dataList="reNewDeletedLinkArr" :type="'record'" @restore="restoreLink"
 					@permanentDelete="permanentDeleteLink" />
 
