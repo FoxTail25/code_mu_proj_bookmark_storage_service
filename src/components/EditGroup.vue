@@ -6,7 +6,6 @@ import SaveText from '@/components/icon/SaveText.vue';
 import Trash from '@/components/icon/Trash.vue';
 import PageHeader from '@/components/PageHeader.vue';
 import { useBookmarkStore } from '@/stores/bookmarks';
-// import Undo from './icon/Undo.vue';
 import ListDeletedItem from './ListDeletedItem.vue';
 
 </script>
@@ -30,12 +29,12 @@ export default {
     checkUp(num) {
       return num == 0
         ? true
-        : false
+        : false;
     },
     checkDown(num) {
       return num == this.bookmarkArr.length - 1
         ? true
-        : false
+        : false;
     },
     editGroupName(elemId, elemName) {
       this.bookmarkArr.forEach(e => {
@@ -49,8 +48,8 @@ export default {
       this.bookmarkArr.forEach(e => {
         if (e.id == elemId) {
           e.edit = false;
-        }
-      })
+        };
+      });
       let newName = this._checkText(this.nameText);
       store.changeGroupName(elemId, newName);
       this.nameText = '';
@@ -61,17 +60,15 @@ export default {
       this.newGroupName = '';
     },
     deleteGroup(id) {
-      // console.log(id)
       store.deleteBookmarkGroup(id);
     },
     restoreGroup(id) {
       console.log('restore group id:', id);
       let daletedGroup = this.deletedItem.filter(e => e.id == id)[0];
-
       store.restoreDeletedGroup(daletedGroup, id);
     },
     permanentRemoval(id) {
-      store.permanentRemovalGroup(id)
+      store.permanentRemovalGroup(id);
     },
     _checkText(str) {
       return str.trim().length > 0 ? str : 'безымянная'
@@ -86,9 +83,9 @@ export default {
       this.deletedItem = store.deletedBookmarksArr;
 
       if (this.deletedItem.length != 0) {
-        this.isDeleted = true
+        this.isDeleted = true;
       } else {
-        this.isDeleted = false
+        this.isDeleted = false;
       }
       return this.deletedItem;
     },
@@ -98,7 +95,6 @@ export default {
     store = useBookmarkStore();
     this.bookmarkArr = store.bookmarkArr;
   },
-
 }
 </script>
 
@@ -175,7 +171,6 @@ export default {
 }
 
 .list-move,
-/* применять переход к движущимся элементам */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -187,8 +182,6 @@ export default {
   transform: translateX(30px);
 }
 
-/* убедитесь, что удаляющиеся элементы выведены из потока, чтобы
-анимации перемещения могли быть рассчитаны правильно. */
 .list-leave-active {
   position: static;
 }
