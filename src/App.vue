@@ -74,11 +74,13 @@ export default {
       <div class="footer">
         <div class="copyright">©</div>
         <div class="author">
-          <a href="https://github.com/FoxTail25" target="_blank" class="author_git">
+          <a href="https://github.com/FoxTail25" target="_blank" class="author_git" aria-label="GitHub автора (откроется в новой вкладке)">
 
           </a>
           <span>FoxTail25</span>
-          <a href="https://t.me/Siverk" target="_blank" class="author_telegram"></a>
+          <a href="https://t.me/Siverk" target="_blank" class="author_telegram"  aria-label="Telegram автора (откроется в новой вкладке)">
+
+          </a>
         </div>
         <div class="year">2025</div>
       </div>
