@@ -1,6 +1,6 @@
 # 📑 Bookmark Storage Service
 
-> **[🌐 Открыть живую версию сервиса (GitHub Pages)]([https://github.io](https://foxtail25.github.io/code_mu_proj_bookmark_storage_service/)**
+> **[🌐 Открыть живую версию сервиса на GitHub Pages]([https://github.io](https://foxtail25.github.io/code_mu_proj_bookmark_storage_service/)**
 
 Веб-приложение для удобного хранения, категоризации и структурирования пользовательских закладок. Проект выполнен в рамках персонального практического задания повышенной сложности от ментора **Дмитрия Трепачёва (Code Mu)**.
 
