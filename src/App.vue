@@ -51,7 +51,7 @@ export default {
         <button type="button" data-bs-target="#caruselChange" data-bs-slide-to="1" aria-label="Slide 2" class="nav-link"
           @click="changeActivTab('editGroup')" ref="editGroup">Редактирование записей</button>
       </li>
-    
+
     </ul>
 
     <div id="caruselChange" class="carousel slide mb-4">
@@ -74,7 +74,9 @@ export default {
       <div class="footer">
         <div class="copyright">©</div>
         <div class="author">
-          <a href="https://github.com/FoxTail25" target="_blank" class="author_git"></a>
+          <a href="https://github.com/FoxTail25" target="_blank" class="author_git">
+
+          </a>
           <span>FoxTail25</span>
           <a href="https://t.me/Siverk" target="_blank" class="author_telegram"></a>
         </div>
@@ -84,7 +86,7 @@ export default {
   </footer>
 
   <!-- Button trigger modal -->
-  <button type="button" class="question" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <button type="button" class="question" data-bs-toggle="modal" data-bs-target="#staticBackdrop" aria-label="О проекте">
     <Question />
   </button>
   <!-- Modal -->
