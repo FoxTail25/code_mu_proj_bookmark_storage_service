@@ -25,7 +25,7 @@ export default {
 
 <template>
   <header v-if="tagN">
-    <h1 :class="classN">{{ msg }}</h1>
+    <h2 :class="classN">{{ msg }}</h2>
   </header>
   <p v-else :class="classN">{{ msg }}</p>
 </template>

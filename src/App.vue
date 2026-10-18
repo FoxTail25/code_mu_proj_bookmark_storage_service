@@ -38,7 +38,7 @@ export default {
 <template>
   <div class="container mh-100">
 
-    <PageHeader :msg="'Сервис хранения закладок сайтов'" :num="2" />
+    <h1 class="text-center fs-2">Сервис хранения закладок сайтов</h1>
 
     <ul class="nav nav-tabs justify-content-center mb-4">
 
