@@ -116,7 +116,7 @@ export default {
 
           <div class="card-body">
 
-            <h5 class="card-title"> {{ elem.section_name }}</h5>
+            <h3 class="card-title fs-5"> {{ elem.section_name }}</h3>
             <p v-for="item in elem.bookmarksList" :key="item.id" class="card-text mb-2">
 
               <a :href="item.link" target="_blank" :title="item.description">
